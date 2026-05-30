@@ -18,35 +18,35 @@
   <style>
     body {
       font-family: 'Inter', 'Heebo', sans-serif;
-      background-color: #06050A; /* Elegant, ultra-dark obsidian */
+      background-color: #050409; /* Ultra-dark cosmic obsidian */
     }
     .font-serif-luxury {
       font-family: 'Playfair Display', serif;
     }
     
-    /* Modern Glassmorphism (Dribbble & Linear Tier) */
+    /* Modern Glassmorphism with Sleek Purple Borders & Soft Glow */
     .glass-panel {
-      background: rgba(13, 11, 20, 0.45);
+      background: rgba(10, 8, 18, 0.55);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(227, 186, 113, 0.08);
+      border: 1px solid rgba(192, 132, 252, 0.08); /* Soft purple border */
     }
     
     .glass-panel-active {
-      background: rgba(22, 19, 34, 0.7);
-      border: 1px solid rgba(227, 186, 113, 0.25);
-      box-shadow: 0 0 30px rgba(227, 186, 113, 0.05);
+      background: rgba(18, 13, 30, 0.85);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      box-shadow: 0 0 35px rgba(192, 132, 252, 0.08);
     }
 
-    /* Double Bezel Card Layering */
+    /* Double Bezel Card Layering (Purple Tone) */
     .bezel-outer {
       box-shadow: 
-        0 0 0 1px rgba(227, 186, 113, 0.08),
-        0 30px 70px rgba(0, 0, 0, 0.8);
+        0 0 0 1px rgba(192, 132, 252, 0.08),
+        0 30px 80px rgba(0, 0, 0, 0.85);
     }
     
     .bezel-inner {
-      border: 1px solid rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.01);
     }
 
     /* 3D Card Perspective */
@@ -60,54 +60,58 @@
       backface-visibility: hidden;
     }
     
-    /* Film Grain Noise Background Overlay for tactile premium feel */
+    /* Tactile film grain noise overlay for premium feel */
     .film-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.012;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.015;
       mix-blend-overlay: true;
     }
   </style>
 </head>
-<body class="text-white min-h-screen selection:bg-[#E3BA71]/20 relative overflow-x-hidden antialiased pb-20">
+<body class="text-white min-h-screen selection:bg-[#c084fc]/25 relative overflow-x-hidden antialiased pb-20">
 
-  <!-- Scroll Progress Indicator -->
-  <div id="scroll-progress" class="fixed top-0 right-0 h-[2px] bg-gradient-to-l from-[#E3BA71] via-[#F5EAD2] to-[#C19F5C] z-50 transition-all duration-100" style="width: 0%"></div>
+  <!-- Scroll Progress Indicator (Mystic Purple Gradient) -->
+  <div id="scroll-progress" class="fixed top-0 right-0 h-[2px] bg-gradient-to-l from-[#c084fc] via-[#e9d5ff] to-[#7e22ce] z-50 transition-all duration-100" style="width: 0%"></div>
 
-  <!-- Ambient Cosmic Nebulae (Extremely soft, high-end glow) -->
-  <div class="fixed top-[-10%] left-[20%] w-[800px] h-[800px] bg-violet-950/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
-  <div class="fixed bottom-[10%] right-[10%] w-[700px] h-[700px] bg-indigo-950/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <!-- Ambient Cosmic Nebulae (Beautiful Purple & Indigo Glow) -->
+  <div class="fixed top-[-10%] left-[15%] w-[850px] h-[850px] bg-purple-950/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[10%] right-[10%] w-[750px] h-[750px] bg-indigo-950/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed top-[40%] left-[-10%] w-[550px] h-[550px] bg-fuchsia-950/10 rounded-full blur-[130px] pointer-events-none z-0"></div>
 
   <!-- Tactile Grain Overlay -->
   <div class="fixed inset-0 bg-repeat pointer-events-none film-grain z-40"></div>
 
+  <!-- Floating Starfield Background Stars -->
+  <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" id="starfield"></div>
+
   <!-- MODERN MINIMALIST NAVIGATION -->
   <header id="navbar" class="w-full max-w-7xl mx-auto px-8 py-8 flex flex-row-reverse justify-between items-center relative z-40">
     <div class="flex items-center gap-3">
-      <div class="w-7 h-7 rounded-full border border-[#E3BA71]/30 flex items-center justify-center font-serif-luxury text-[#E3BA71] font-semibold text-xs">
+      <div class="w-7 h-7 rounded-full border border-[#c084fc]/30 flex items-center justify-center font-serif-luxury text-[#c084fc] font-semibold text-xs shadow-[0_0_15px_rgba(192,132,252,0.15)]">
         K
       </div>
       <div class="text-right">
         <span class="font-serif-luxury font-bold tracking-[0.2em] text-xs uppercase text-white">KASSI TAROT</span>
-        <span class="text-[8px] text-[#E3BA71] tracking-[0.3em] uppercase block">MODERN ORACLE</span>
+        <span class="text-[8px] text-[#c084fc] tracking-[0.3em] uppercase block">MODERN ORACLE</span>
       </div>
     </div>
     
     <nav class="hidden md:flex gap-10 text-[10px] font-medium tracking-[0.25em] text-slate-400 uppercase">
-      <a href="#booking" class="hover:text-[#E3BA71] transition-all duration-300">Booking // פגישה</a>
-      <a href="#tarot" class="hover:text-[#E3BA71] transition-all duration-300">Tarot // קלפים</a>
-      <a href="#daily" class="hover:text-[#E3BA71] transition-all duration-300">Daily // יומי</a>
-      <a href="#philosophy" class="hover:text-[#E3BA71] transition-all duration-300">Philosophy // גישה</a>
+      <a href="#booking" class="hover:text-[#c084fc] transition-all duration-300">Booking // פגישה</a>
+      <a href="#tarot" class="hover:text-[#c084fc] transition-all duration-300">Tarot // קלפים</a>
+      <a href="#daily" class="hover:text-[#c084fc] transition-all duration-300">Daily // יומי</a>
+      <a href="#philosophy" class="hover:text-[#c084fc] transition-all duration-300">Philosophy // גישה</a>
     </nav>
 
     <a 
       href="#booking"
-      class="px-5 py-2 rounded-full border border-[#E3BA71]/20 text-[9px] uppercase font-semibold tracking-widest text-[#E3BA71] hover:bg-[#E3BA71]/5 active:scale-95 transition-all"
+      class="px-5 py-2 rounded-full border border-[#c084fc]/20 text-[9px] uppercase font-semibold tracking-widest text-[#c084fc] hover:bg-[#c084fc]/5 active:scale-95 transition-all shadow-[0_0_15px_rgba(192,132,252,0.05)]"
     >
       Reserve Altar
     </a>
   </header>
 
-  <!-- MAIN PLATFORM CANVAS (THE FORTUNE TELLER APP - 100% FRESH DESIGN) -->
+  <!-- MAIN PLATFORM CANVAS (THE FORTUNE TELLER APP - 100% FRESH PURPLE DESIGN) -->
   <main class="w-full max-w-7xl mx-auto px-6 md:px-12 pt-6 relative z-30 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
     
     <!-- LEFT SIDEBAR: NATIVE APPLICATION NAVIGATION (Bento-styled) -->
@@ -116,7 +120,7 @@
         <div class="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none"></div>
         <div class="space-y-6">
           <div class="text-right">
-            <span class="text-[9px] text-[#E3BA71] uppercase font-bold tracking-widest block">Welcome Back</span>
+            <span class="text-[9px] text-[#c084fc] uppercase font-bold tracking-widest block">Welcome Back</span>
             <h1 class="font-serif-luxury text-xl text-white mt-1">קאסי טארוט</h1>
             <p class="text-[10px] text-slate-500 mt-1">מקדש דיגיטלי להתפתחות ותודעה</p>
           </div>
@@ -124,12 +128,12 @@
           <hr class="border-white/5" />
           
           <div class="space-y-2 text-right">
-            <button onclick="switchView('daily')" id="nav-daily" class="w-full px-4 py-3 rounded-xl flex flex-row-reverse justify-between items-center text-xs font-semibold text-[#E3BA71] bg-white/[0.02] border border-[#E3BA71]/20 transition-all duration-300">
+            <button onclick="switchView('daily')" id="nav-daily" class="w-full px-4 py-3 rounded-xl flex flex-row-reverse justify-between items-center text-xs font-semibold text-[#c084fc] bg-white/[0.02] border border-[#c084fc]/20 transition-all duration-300">
               <span class="flex items-center gap-2 flex-row-reverse">
-                <span>🌟</span>
+                <span>🔮</span>
                 <span>הורוסקופ יומי</span>
               </span>
-              <span class="font-serif-luxury text-[8px] tracking-widest text-[#E3BA71]/60">01</span>
+              <span class="font-serif-luxury text-[8px] tracking-widest text-[#c084fc]/60">01</span>
             </button>
             <button onclick="switchView('tarot')" id="nav-tarot" class="w-full px-4 py-3 rounded-xl flex flex-row-reverse justify-between items-center text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/[0.01] transition-all duration-300">
               <span class="flex items-center gap-2 flex-row-reverse">
@@ -156,20 +160,20 @@
           <span class="text-xs font-semibold text-slate-300">ירח מתמלא (Waxing Gibbous)</span>
           <span class="text-lg">🌔</span>
         </div>
-        <p class="text-[10px] text-[#E3BA71]/70 mt-2 leading-relaxed">זמן מצוין להרחבת אופקים, לקיחת יוזמות יצירתיות וקבלת החלטות מתוך אינטואיציה.</p>
+        <p class="text-[10px] text-[#c084fc]/70 mt-2 leading-relaxed">זמן מצוין להרחבת אופקים, לקיחת יוזמות יצירתיות וקבלת החלטות מתוך אינטואיציה.</p>
       </div>
     </section>
 
     <!-- CENTER & RIGHT: DYNAMIC APPLICATION WINDOW -->
     <section class="lg:col-span-9 space-y-6" id="app-viewport">
       
-      <!-- ================= SCREEN 1: DAILY FORTUNE (ACTIVE BY DEFAULT) ================= -->
+      <!-- ================= SCREEN 1: DAILY FORTUNE ================= -->
       <div id="view-daily" class="space-y-6">
         <div class="glass-panel p-8 md:p-12 rounded-[2.5rem] bezel-outer relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-tr from-indigo-950/10 to-transparent pointer-events-none"></div>
+          <div class="absolute inset-0 bg-gradient-to-tr from-purple-950/10 to-transparent pointer-events-none"></div>
           
           <div class="max-w-xl text-right space-y-4 mb-10">
-            <span class="text-[9px] text-[#E3BA71] uppercase font-bold tracking-[0.3em] block">daily fortune</span>
+            <span class="text-[9px] text-[#c084fc] uppercase font-bold tracking-[0.3em] block">daily fortune</span>
             <h2 class="font-serif-luxury text-3xl md:text-5xl font-normal text-white leading-tight">גלי את סודות המזל שלך להיום</h2>
             <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
               הכוכבים נעים במסלולים שמימיים מדויקים. בחרי את המזל שלך כדי לקבל הדרכה רוחנית, עצה יומית מעצימה ומיקוד תודעתי.
@@ -179,62 +183,62 @@
           <!-- Zodiac Grid (Elegant Dribbble-tier cards) -->
           <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3" id="zodiac-grid">
             <div onclick="revealDailyFortune('aries')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♈</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♈</span>
               <span class="text-[10px] font-semibold text-slate-300">טלה</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Aries</span>
             </div>
             <div onclick="revealDailyFortune('taurus')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♉</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♉</span>
               <span class="text-[10px] font-semibold text-slate-300">שור</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Taurus</span>
             </div>
             <div onclick="revealDailyFortune('gemini')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♊</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♊</span>
               <span class="text-[10px] font-semibold text-slate-300">תאומים</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Gemini</span>
             </div>
             <div onclick="revealDailyFortune('cancer')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♋</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♋</span>
               <span class="text-[10px] font-semibold text-slate-300">סרטן</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Cancer</span>
             </div>
             <div onclick="revealDailyFortune('leo')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♌</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♌</span>
               <span class="text-[10px] font-semibold text-slate-300">אריה</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Leo</span>
             </div>
             <div onclick="revealDailyFortune('virgo')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♍</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♍</span>
               <span class="text-[10px] font-semibold text-slate-300">בתולה</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Virgo</span>
             </div>
             <div onclick="revealDailyFortune('libra')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♎</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♎</span>
               <span class="text-[10px] font-semibold text-slate-300">מאזניים</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Libra</span>
             </div>
             <div onclick="revealDailyFortune('scorpio')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♏</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♏</span>
               <span class="text-[10px] font-semibold text-slate-300">עקרב</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Scorpio</span>
             </div>
             <div onclick="revealDailyFortune('sagittarius')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♐</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♐</span>
               <span class="text-[10px] font-semibold text-slate-300">קשת</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Sagittarius</span>
             </div>
             <div onclick="revealDailyFortune('capricorn')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♑</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♑</span>
               <span class="text-[10px] font-semibold text-slate-300">גדי</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Capricorn</span>
             </div>
             <div onclick="revealDailyFortune('aquarius')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♒</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♒</span>
               <span class="text-[10px] font-semibold text-slate-300">דלי</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Aquarius</span>
             </div>
             <div onclick="revealDailyFortune('pisces')" class="glass-panel p-4 rounded-2xl cursor-pointer hover:glass-panel-active transition-all duration-300 flex flex-col items-center justify-center gap-1.5 aspect-square relative group">
-              <span class="text-[#E3BA71] text-xl group-hover:scale-110 transition-transform">♓</span>
+              <span class="text-[#c084fc] text-xl group-hover:scale-110 transition-transform">♓</span>
               <span class="text-[10px] font-semibold text-slate-300">דגים</span>
               <span class="text-[8px] text-slate-500 font-serif-luxury tracking-wider">Pisces</span>
             </div>
@@ -245,10 +249,10 @@
         <div id="fortune-display-card" class="glass-panel p-8 rounded-[2rem] bezel-outer text-right relative hidden opacity-0 translate-y-4 transition-all duration-500">
           <div class="flex flex-row-reverse justify-between items-center border-b border-white/5 pb-4 mb-6">
             <div class="flex items-center gap-3">
-              <div id="fortune-badge-icon" class="w-12 h-12 rounded-full bg-[#E3BA71]/5 border border-[#E3BA71]/20 flex items-center justify-center text-xl text-[#E3BA71]">♈</div>
+              <div id="fortune-badge-icon" class="w-12 h-12 rounded-full bg-[#c084fc]/5 border border-[#c084fc]/20 flex items-center justify-center text-xl text-[#c084fc]">♈</div>
               <div>
                 <h4 id="fortune-badge-title-he" class="font-serif-luxury font-bold text-lg text-white">טלה</h4>
-                <p id="fortune-badge-title-en" class="text-[8px] text-[#E3BA71]/80 uppercase tracking-widest mt-0.5">Daily Forecast</p>
+                <p id="fortune-badge-title-en" class="text-[8px] text-[#c084fc]/80 uppercase tracking-widest mt-0.5">Daily Forecast</p>
               </div>
             </div>
             <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">TODAY // מפת השמיים להיום</span>
@@ -259,11 +263,11 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-white/5 pt-6">
               <div class="bg-white/[0.01] p-5 rounded-2xl border border-white/5">
-                <span class="text-[8px] text-[#E3BA71] font-bold uppercase tracking-widest block mb-1">🕯️ המלצה לאיזון אנרגטי</span>
+                <span class="text-[8px] text-[#c084fc] font-bold uppercase tracking-widest block mb-1">🕯️ המלצה לאיזון אנרגטי</span>
                 <p id="fortune-text-advice" class="text-slate-400 text-xs leading-relaxed font-light"></p>
               </div>
               <div class="bg-white/[0.01] p-5 rounded-2xl border border-white/5">
-                <span class="text-[8px] text-[#E3BA71] font-bold uppercase tracking-widest block mb-1">🔮 קלף מנחה להיום</span>
+                <span class="text-[8px] text-[#c084fc] font-bold uppercase tracking-widest block mb-1">🔮 קלף מנחה להיום</span>
                 <p id="fortune-text-tarot" class="text-slate-400 text-xs leading-relaxed font-light"></p>
               </div>
             </div>
@@ -277,7 +281,7 @@
           <div class="absolute inset-0 bg-gradient-to-tr from-purple-950/10 to-transparent pointer-events-none"></div>
           
           <div class="max-w-xl space-y-3">
-            <span class="text-[9px] text-[#E3BA71] uppercase font-bold tracking-[0.3em] block">Tarot Reader</span>
+            <span class="text-[9px] text-[#c084fc] uppercase font-bold tracking-[0.3em] block">Tarot Reader</span>
             <h2 class="font-serif-luxury text-3xl md:text-5xl font-normal text-white leading-tight">מקדש קריאת הקלפים</h2>
             <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
               התרכזי בשאלה שמלווה אותך, קחי נשימה עמוקה, ולחצי על קלף מתוך החפיסה השמימית כדי לשלוף הדרכה רוחנית מדוייקת.
@@ -288,16 +292,31 @@
           <div class="py-12 flex items-center justify-center relative min-h-[300px]">
             <div class="relative w-44 h-64 perspective-1200" id="tarot-active-deck">
               <!-- Animated Backside Card Layout -->
-              <div onclick="drawTarotCard()" class="absolute inset-0 w-full h-full bg-[#0D0C15] rounded-2xl border-2 border-[#E3BA71]/20 hover:border-[#E3BA71]/50 cursor-pointer shadow-2xl transition-all duration-300 preserve-3d flex flex-col justify-between p-4 transform hover:-translate-y-4">
-                <span class="text-[8px] font-serif-luxury text-[#E3BA71]/30">XIII</span>
-                <div class="w-16 h-16 mx-auto rounded-full border border-[#E3BA71]/10 flex items-center justify-center text-[#E3BA71]/40">
-                  <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.25">
-                    <circle cx="12" cy="12" r="8" stroke-dasharray="1 2" />
-                    <circle cx="12" cy="12" r="5" />
-                    <path d="M12 2v20M2 12h20" />
+              <div onclick="drawTarotCard()" class="absolute inset-0 w-full h-full bg-[#07050E] rounded-2xl border-2 border-[#c084fc]/20 hover:border-[#c084fc]/50 cursor-pointer shadow-2xl transition-all duration-300 preserve-3d flex flex-col justify-between p-4 transform hover:-translate-y-4">
+                <span class="text-[8px] font-serif-luxury text-[#c084fc]/40 font-bold">XIII</span>
+                
+                <!-- Hand-crafted detailed Serene Sun illustration in minimal purple lines -->
+                <div class="w-24 h-24 mx-auto relative flex items-center justify-center text-[#c084fc]/70">
+                  <svg class="w-20 h-20 animate-spin" style="animation-duration: 50s;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                    <!-- Rays -->
+                    <path d="M50 15 L50 5 M50 85 L50 95 M15 50 L5 50 M85 50 L95 50 M25 25 L15 15 M75 75 L85 85 M25 75 L15 85 M75 25 L85 15" stroke-width="0.8"/>
+                    <path d="M50 25 C45 35 40 35 30 30 C35 40 35 45 30 50 C40 50 45 45 50 35" stroke-dasharray="1 1"/>
+                    <!-- Outer Circle -->
+                    <circle cx="50" cy="50" r="28" />
+                    <!-- Serene Sleeping Face -->
+                    <path d="M42 48 Q45 52 48 48" stroke-width="0.8" stroke-linecap="round"/> <!-- Left eye -->
+                    <path d="M52 48 Q55 52 58 48" stroke-width="0.8" stroke-linecap="round"/> <!-- Right eye -->
+                    <path d="M49 48 L48 55 L52 55" stroke-width="0.6"/> <!-- Nose -->
+                    <path d="M46 62 Q50 65 54 62" stroke-width="0.8" stroke-linecap="round"/> <!-- Lips -->
+                    <!-- Celestial Stars -->
+                    <circle cx="50" cy="20" r="1" fill="currentColor"/>
+                    <circle cx="50" cy="80" r="1" fill="currentColor"/>
+                    <circle cx="20" cy="50" r="1" fill="currentColor"/>
+                    <circle cx="80" cy="50" r="1" fill="currentColor"/>
                   </svg>
                 </div>
-                <span class="text-[8px] font-serif-luxury text-[#E3BA71]/30 text-left block rotate-180">XIII</span>
+
+                <span class="text-[8px] font-serif-luxury text-[#c084fc]/40 font-bold text-left block rotate-180">XIII</span>
               </div>
             </div>
 
@@ -305,19 +324,27 @@
             <div id="deck-floater" class="absolute w-44 h-64 rounded-2xl cursor-pointer pointer-events-none opacity-0 z-30 perspective-1200 hidden">
               <div id="deck-card-inner" class="relative w-full h-full rounded-2xl preserve-3d transition-transform duration-1000">
                 <!-- Back -->
-                <div class="absolute inset-0 w-full h-full bg-[#0D0C15] rounded-2xl border-2 border-[#E3BA71]/45 flex flex-col justify-between p-4 backface-hidden shadow-2xl">
-                  <span class="text-[8px] font-serif-luxury text-[#E3BA71]/30">XIII</span>
-                  <div class="w-16 h-16 mx-auto rounded-full border border-[#E3BA71]/10 flex items-center justify-center text-[#E3BA71]/40">
-                    <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.25">
-                      <circle cx="12" cy="12" r="8" stroke-dasharray="1 2" stroke-width="0.5"/>
-                      <circle cx="12" cy="12" r="5" stroke-width="0.5"/>
-                      <path d="M12 2v20M2 12h20" stroke-width="0.5"/>
+                <div class="absolute inset-0 w-full h-full bg-[#07050E] rounded-2xl border-2 border-[#c084fc]/45 flex flex-col justify-between p-4 backface-hidden shadow-2xl">
+                  <span class="text-[8px] font-serif-luxury text-[#c084fc]/40 font-bold">XIII</span>
+                  
+                  <!-- Hand-crafted detailed Serene Sun illustration in minimal purple lines -->
+                  <div class="w-24 h-24 mx-auto relative flex items-center justify-center text-[#c084fc]/70">
+                    <svg class="w-20 h-20 animate-spin" style="animation-duration: 50s;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                      <path d="M50 15 L50 5 M50 85 L50 95 M15 50 L5 50 M85 50 L95 50 M25 25 L15 15 M75 75 L85 85 M25 75 L15 85 M75 25 L85 15" stroke-width="0.8"/>
+                      <circle cx="50" cy="50" r="28" />
+                      <path d="M42 48 Q45 52 48 48" stroke-width="0.8" stroke-linecap="round"/>
+                      <path d="M52 48 Q55 52 58 48" stroke-width="0.8" stroke-linecap="round"/>
+                      <path d="M49 48 L48 55 L52 55" stroke-width="0.6"/>
+                      <path d="M46 62 Q50 65 54 62" stroke-width="0.8" stroke-linecap="round"/>
+                      <circle cx="50" cy="20" r="1" fill="currentColor"/>
+                      <circle cx="50" cy="80" r="1" fill="currentColor"/>
                     </svg>
                   </div>
-                  <span class="text-[8px] font-serif-luxury text-[#E3BA71]/30 text-left block rotate-180">XIII</span>
+
+                  <span class="text-[8px] font-serif-luxury text-[#c084fc]/40 font-bold text-left block rotate-180">XIII</span>
                 </div>
                 <!-- Front -->
-                <div id="deck-card-front" class="absolute inset-0 w-full h-full bg-[#13111C] rounded-2xl border-2 flex flex-col justify-between backface-hidden [transform:rotateY(180deg)] shadow-2xl overflow-hidden" style="border-color: #E3BA71">
+                <div id="deck-card-front" class="absolute inset-0 w-full h-full bg-[#13111C] rounded-2xl border-2 flex flex-col justify-between backface-hidden [transform:rotateY(180deg)] shadow-2xl overflow-hidden" style="border-color: #c084fc">
                   <img id="deck-front-img" src="" alt="Tarot Front" class="w-full h-full object-cover" />
                 </div>
               </div>
@@ -326,37 +353,37 @@
 
           <!-- Active Hint -->
           <div class="text-center mt-4">
-            <p id="tarot-deck-hint" class="text-[#E3BA71] font-serif-luxury text-[9px] tracking-[0.3em] font-bold uppercase">— לחצי על חפיסת הקלפים כדי לשלוף —</p>
+            <p id="tarot-deck-hint" class="text-[#c084fc] font-serif-luxury text-[9px] tracking-[0.3em] font-bold uppercase">— לחצי על חפיסת הקלפים כדי לשלוף —</p>
           </div>
         </div>
 
         <!-- Interpretive Panel revealed after card flip -->
         <div id="tarot-interpretation-card" class="glass-panel p-8 rounded-[2rem] bezel-outer text-right relative hidden opacity-0 translate-y-4 transition-all duration-500">
-          <div class="absolute inset-2 border border-[#E3BA71]/5 rounded-[2.5rem] pointer-events-none"></div>
+          <div class="absolute inset-2 border border-[#c084fc]/5 rounded-[2.5rem] pointer-events-none"></div>
           
           <div class="flex flex-row-reverse justify-between items-center border-b border-white/5 pb-5 mb-6 relative z-10">
             <div class="flex items-center gap-4">
-              <div id="tarot-reveal-badge" class="w-14 h-14 rounded-2xl bg-[#13111C] border border-[#E3BA71]/30 flex items-center justify-center text-[#E3BA71] text-xl font-bold font-serif-luxury">0</div>
+              <div id="tarot-reveal-badge" class="w-14 h-14 rounded-2xl bg-[#13111C] border border-[#c084fc]/30 flex items-center justify-center text-[#c084fc] text-xl font-bold font-serif-luxury">0</div>
               <div>
                 <h3 id="tarot-reveal-title-he" class="font-serif-luxury font-bold text-2xl text-white">השוטה</h3>
-                <p id="tarot-reveal-title-en" class="text-[8px] text-[#E3BA71] uppercase tracking-[0.25em] mt-1">THE FOOL // ARCANA 0</p>
+                <p id="tarot-reveal-title-en" class="text-[8px] text-[#c084fc] uppercase tracking-[0.25em] mt-1">THE FOOL // ARCANA 0</p>
               </div>
             </div>
-            <span class="text-[9px] text-[#E3BA71] font-bold uppercase tracking-widest">TAROT WISDOM</span>
+            <span class="text-[9px] text-[#c084fc] font-bold uppercase tracking-widest">TAROT WISDOM</span>
           </div>
 
           <div class="space-y-6 relative z-10">
             <div>
               <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">האנרגיה המזוקקת</span>
-              <p id="tarot-reveal-meaning" class="text-[#F5EAD2]/90 font-bold text-sm leading-relaxed mt-1"></p>
+              <p id="tarot-reveal-meaning" class="text-[#e9d5ff]/90 font-bold text-sm leading-relaxed mt-1"></p>
             </div>
             <div>
               <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">פירוש רוחני ומנטלי</span>
               <p id="tarot-reveal-details" class="text-slate-400 text-xs leading-relaxed mt-1.5 font-light"></p>
             </div>
-            <div class="bg-[#E3BA71]/5 border border-[#E3BA71]/15 p-5 rounded-2xl">
-              <span class="text-[9px] text-[#E3BA71] font-bold uppercase tracking-widest block">🕯️ עצת הקלף לשבוע הקרוב</span>
-              <p id="tarot-reveal-advice" class="text-[#F5EAD2]/90 font-bold text-xs leading-relaxed mt-1.5"></p>
+            <div class="bg-[#c084fc]/5 border border-[#c084fc]/15 p-5 rounded-2xl">
+              <span class="text-[9px] text-[#c084fc] font-bold uppercase tracking-widest block">🕯️ עצת הקלף לשבוע הקרוב</span>
+              <p id="tarot-reveal-advice" class="text-[#e9d5ff]/90 font-bold text-xs leading-relaxed mt-1.5"></p>
             </div>
           </div>
         </div>
@@ -366,19 +393,19 @@
     </section>
   </main>
 
-  <!-- 📂 Philosophy & Editorial Altar (No cheesy designs) -->
+  <!-- 📂 Philosophy & Editorial Altar -->
   <section id="philosophy" class="relative w-full max-w-7xl mx-auto px-8 py-24 border-t border-white/5 mt-16 z-30">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       
       <div class="space-y-6 text-right">
         <div class="flex items-center gap-2 justify-end">
-          <span class="w-2 h-0.5 bg-[#E3BA71]"></span>
-          <span class="text-[9px] text-[#E3BA71] font-bold uppercase tracking-widest font-serif-luxury">THE MODERN ORACLE</span>
+          <span class="w-2 h-0.5 bg-[#c084fc]"></span>
+          <span class="text-[9px] text-[#c084fc] font-bold uppercase tracking-widest font-serif-luxury">THE MODERN ORACLE</span>
         </div>
         
         <h2 class="text-3xl md:text-5xl font-serif-luxury font-normal text-white leading-tight">
           הטארוט כראי פסיכולוגי <br />
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#E3BA71] to-[#C19F5C]">ולא כחיזוי פסיבי של העתיד</span>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#c084fc] to-[#a855f7]">ולא כחיזוי פסיבי של העתיד</span>
         </h2>
 
         <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
@@ -387,14 +414,14 @@
 
         <div class="space-y-4 pt-4">
           <div class="flex flex-row-reverse gap-4 items-start">
-            <span class="text-[#E3BA71] font-serif-luxury font-bold text-lg">01 /</span>
+            <span class="text-[#c084fc] font-serif-luxury font-bold text-lg">01 /</span>
             <div>
               <h4 class="font-serif-luxury font-bold text-white text-base">קריאות פסיכולוגיות מעצימות</h4>
               <p class="text-slate-400 text-xs font-light mt-1 leading-relaxed">חיבור של הקלפים לחיים האמיתיים שלך, לחרדות ולשאיפות שמעסיקות אותך ביומיום.</p>
             </div>
           </div>
           <div class="flex flex-row-reverse gap-4 items-start">
-            <span class="text-[#E3BA71] font-serif-luxury font-bold text-lg">02 /</span>
+            <span class="text-[#c084fc] font-serif-luxury font-bold text-lg">02 /</span>
             <div>
               <h4 class="font-serif-luxury font-bold text-white text-base">ניפוץ מיתוסים ופחד</h4>
               <p class="text-slate-400 text-xs font-light mt-1 leading-relaxed">אני מלמדת אותך למה קלפים 'מפחידים' כמו המוות, המגדל או השטן הם בעצם ברכות המאפשרות שחרור ופריחה מחדש.</p>
@@ -403,17 +430,17 @@
         </div>
       </div>
 
-      <!-- Double-bezel Showcase Card -->
+      <!-- Double-bezel Showcase Card (Purple Accent) -->
       <div class="relative max-w-md mx-auto">
-        <div class="absolute inset-0 bg-gradient-to-tr from-purple-800/5 to-amber-500/5 rounded-[3rem] blur-[30px]"></div>
-        <div class="relative bg-[#0D0B14]/80 border border-[#E3BA71]/15 p-8 rounded-[2.5rem] double-bezel text-right space-y-6">
-          <span class="text-[8px] text-[#E3BA71] font-bold uppercase tracking-widest font-serif-luxury">WORDS FROM CASSIE</span>
-          <p class="text-[#F5EAD2]/90 font-serif-luxury font-light italic text-base leading-relaxed">
+        <div class="absolute inset-0 bg-gradient-to-tr from-purple-800/5 to-indigo-500/5 rounded-[3rem] blur-[30px]"></div>
+        <div class="relative bg-[#0D0B14]/80 border border-[#c084fc]/15 p-8 rounded-[2.5rem] double-bezel text-right space-y-6">
+          <span class="text-[8px] text-[#c084fc] font-bold uppercase tracking-widest font-serif-luxury">WORDS FROM CASSIE</span>
+          <p class="text-[#e9d5ff]/90 font-serif-luxury font-light italic text-base leading-relaxed">
             "הקלפים לא קובעים מי תהיי מחר. הם רק מראים לך איפה את עומדת היום, כדי שתוכלי לברוא את המחר שאת רוצה."
           </p>
           <div class="flex items-center gap-3 justify-end pt-3 border-t border-white/5">
             <span class="text-xs text-slate-400 font-semibold font-serif-luxury">Cassie // קאסי טארוט</span>
-            <div class="w-8 h-8 rounded-full bg-white/5 border border-[#E3BA71]/25 flex items-center justify-center font-bold text-[10px] text-[#E3BA71]">
+            <div class="w-8 h-8 rounded-full bg-white/5 border border-[#c084fc]/25 flex items-center justify-center font-bold text-[10px] text-[#c084fc]">
               CT
             </div>
           </div>
@@ -426,7 +453,7 @@
   <!-- 📂 COSMIC BLOG (EDITORIAL) -->
   <section id="blog" class="relative w-full max-w-7xl mx-auto px-8 py-24 border-t border-white/5 z-30">
     <div class="text-center max-w-xl mx-auto space-y-3 mb-16">
-      <span class="text-[9px] text-[#E3BA71] uppercase font-bold tracking-[0.3em] block">Insights</span>
+      <span class="text-[9px] text-[#c084fc] uppercase font-bold tracking-[0.3em] block">Insights</span>
       <h2 class="font-serif-luxury text-3xl md:text-5xl font-normal text-white">בלוג השראה ותודעה קוסמית</h2>
       <p class="text-slate-400 text-xs font-light leading-relaxed">
         מאמרי עומק, ריטואלים שבועיים ותובנות רוחניות ופסיכולוגיות שיעזרו לך לנווט בעליות ובמורדות של מסע חייך.
@@ -439,10 +466,10 @@
       <div class="glass-panel p-8 rounded-[2rem] text-right flex flex-col justify-between gap-6 transition-all duration-300 hover:glass-panel-active group">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-serif-luxury">
-            <span class="text-[#E3BA71]">פסיכולוגיה וטארוט</span>
+            <span class="text-[#c084fc]">פסיכולוגיה וטארוט</span>
             <span>28 במאי 2026</span>
           </div>
-          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#E3BA71] transition-colors leading-snug">
+          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#c084fc] transition-colors leading-snug">
             למה קלף המוות הוא בעצם הברכה הגדולה ביותר של חייך
           </h3>
           <p class="text-slate-400 text-xs font-light leading-relaxed">
@@ -450,7 +477,7 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('death')" class="text-[10px] font-bold tracking-wider text-[#E3BA71] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר ←</button>
+          <button onclick="openBlog('death')" class="text-[10px] font-bold tracking-wider text-[#c084fc] hover:text-[#e9d5ff] transition-colors cursor-pointer">קראי מאמר ←</button>
           <span class="text-[9px] text-slate-500 font-semibold font-serif-luxury">5 min</span>
         </div>
       </div>
@@ -459,10 +486,10 @@
       <div class="glass-panel p-8 rounded-[2rem] text-right flex flex-col justify-between gap-6 transition-all duration-300 hover:glass-panel-active group">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-serif-luxury">
-            <span class="text-[#E3BA71]">רוחניות מודרנית</span>
+            <span class="text-[#c084fc]">רוחניות מודרנית</span>
             <span>14 במאי 2026</span>
           </div>
-          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#E3BA71] transition-colors leading-snug">
+          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#c084fc] transition-colors leading-snug">
             הטארוט כראי פסיכולוגי: המעבר מחיזוי פסיבי לבוראות פעילה
           </h3>
           <p class="text-slate-400 text-xs font-light leading-relaxed">
@@ -470,7 +497,7 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('mirror')" class="text-[10px] font-bold tracking-wider text-[#E3BA71] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר ←</button>
+          <button onclick="openBlog('mirror')" class="text-[10px] font-bold tracking-wider text-[#c084fc] hover:text-[#e9d5ff] transition-colors cursor-pointer">קראי מאמר ←</button>
           <span class="text-[9px] text-slate-500 font-semibold font-serif-luxury">4 min</span>
         </div>
       </div>
@@ -479,10 +506,10 @@
       <div class="glass-panel p-8 rounded-[2rem] text-right flex flex-col justify-between gap-6 transition-all duration-300 hover:glass-panel-active group">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-serif-luxury">
-            <span class="text-[#E3BA71]">כלים מעשיים</span>
+            <span class="text-[#c084fc]">כלים מעשיים</span>
             <span>05 במאי 2026</span>
           </div>
-          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#E3BA71] transition-colors leading-snug">
+          <h3 class="font-serif-luxury text-xl text-white group-hover:text-[#c084fc] transition-colors leading-snug">
             3 שאלות התבוננות בהשראת אנרגיית הקוסם (The Magician)
           </h3>
           <p class="text-slate-400 text-xs font-light leading-relaxed">
@@ -490,7 +517,7 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('magician-art')" class="text-[10px] font-bold tracking-wider text-[#E3BA71] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר ←</button>
+          <button onclick="openBlog('magician-art')" class="text-[10px] font-bold tracking-wider text-[#c084fc] hover:text-[#e9d5ff] transition-colors cursor-pointer">קראי מאמר ←</button>
           <span class="text-[9px] text-slate-500 font-semibold font-serif-luxury">3 min</span>
         </div>
       </div>
@@ -500,7 +527,7 @@
 
   <!-- EDITORIAL BLOG READER MODAL (Drawer) -->
   <div id="blog-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
-    <div class="bg-[#0D0B14] border border-[#E3BA71]/30 rounded-[2rem] max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8 md:p-12 text-right relative shadow-2xl double-bezel">
+    <div class="bg-[#0D0B14] border border-[#c084fc]/30 rounded-[2rem] max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8 md:p-12 text-right relative shadow-2xl double-bezel">
       
       <!-- Close Button -->
       <button 
@@ -512,7 +539,7 @@
 
       <div class="space-y-6 relative z-10">
         <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-serif-luxury pt-2 border-b border-white/5 pb-4">
-          <span id="blog-modal-category" class="text-[#E3BA71]"></span>
+          <span id="blog-modal-category" class="text-[#c084fc]"></span>
           <span id="blog-modal-date"></span>
         </div>
 
@@ -528,7 +555,7 @@
     <div class="max-w-xl mx-auto space-y-8">
       
       <div class="text-center space-y-3">
-        <span class="text-[9px] text-[#E3BA71] uppercase font-bold tracking-[0.3em] block">Booking</span>
+        <span class="text-[9px] text-[#c084fc] uppercase font-bold tracking-[0.3em] block">Booking</span>
         <h2 class="font-serif-luxury text-3xl md:text-5xl font-normal text-white">תיאום קריאה אישית</h2>
         <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
           מעוניינת לצלול לעומק הדילמות שלך, לקבל הכוונה מדויקת ומפת דרכים מפורטת לנשמה? מלאי את הפרטים, ואחזור אלייך באופן אישי.
@@ -536,7 +563,7 @@
       </div>
 
       <form id="booking-form" class="glass-panel rounded-[2rem] p-8 md:p-10 shadow-2xl text-right space-y-6 bezel-outer relative">
-        <div class="absolute inset-2 border border-[#E3BA71]/5 rounded-[2rem] pointer-events-none"></div>
+        <div class="absolute inset-2 border border-[#c084fc]/5 rounded-[2rem] pointer-events-none"></div>
 
         <div class="space-y-1.5 relative z-10">
           <label class="text-[9px] text-slate-400 font-semibold uppercase tracking-widest block">שם מלא</label>
@@ -545,7 +572,7 @@
             id="book-name"
             required
             placeholder="הכניסי את שמך..."
-            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-700 text-white"
+            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#c084fc]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-700 text-white"
             dir="rtl"
           />
         </div>
@@ -557,7 +584,7 @@
             id="book-email"
             required
             placeholder="כתובת האימייל שלך..."
-            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-700 text-white"
+            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#c084fc]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-700 text-white"
             dir="rtl"
           />
         </div>
@@ -566,13 +593,13 @@
           <label class="text-[9px] text-slate-400 font-semibold uppercase tracking-widest block">סגנון הפריסה הרצוי</label>
           <select 
             id="book-spread"
-            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all cursor-pointer text-white"
+            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#c084fc]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all cursor-pointer text-white text-slate-300"
             dir="rtl"
           >
-            <option value="weekly">קריאת הכוונה שבועית מורחבת (3 קלפים)</option>
-            <option value="love">קריאת אהבה וזוגיות מעמיקה (5 קלפים)</option>
-            <option value="cross">צלב קלטי - מפת דרכים מלאה לחיים (10 קלפים)</option>
-            <option value="career">קריאת פיתוח עסקי וקריירה (4 קלפים)</option>
+            <option class="bg-[#050409]" value="weekly">קריאת הכוונה שבועית מורחבת (3 קלפים)</option>
+            <option class="bg-[#050409]" value="love">קריאת אהבה וזוגיות מעמיקה (5 קלפים)</option>
+            <option class="bg-[#050409]" value="cross">צלב קלטי - מפת דרכים מלאה לחיים (10 קלפים)</option>
+            <option class="bg-[#050409]" value="career">קריאת פיתוח עסקי וקריירה (4 קלפים)</option>
           </select>
         </div>
 
@@ -581,14 +608,14 @@
           <textarea 
             id="book-question"
             placeholder="שתפי אותי במה שמעסיק אותך, כדי שאוכל להכין את הפריסה במיוחד עבורך..."
-            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-4 text-xs text-right focus:outline-none transition-all h-32 resize-none placeholder:text-slate-700 leading-relaxed text-white"
+            class="w-full bg-white/[0.01] border border-white/10 hover:border-white/20 focus:border-[#c084fc]/50 focus:bg-[#121021]/50 rounded-xl px-4 py-4 text-xs text-right focus:outline-none transition-all h-32 resize-none placeholder:text-slate-700 leading-relaxed text-white"
             dir="rtl"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          class="w-full py-4 bg-gradient-to-r from-[#E3BA71] via-[#F5EAD2] to-[#C19F5C] text-slate-950 font-bold text-xs rounded-xl hover:shadow-[0_0_20px_rgba(227,186,113,0.2)] active:scale-95 transition-all shadow-lg tracking-widest relative z-10"
+          class="w-full py-4 bg-gradient-to-r from-[#c084fc] via-[#e9d5ff] to-[#7e22ce] text-white font-bold text-xs rounded-xl hover:shadow-[0_0_25px_rgba(192,132,252,0.3)] active:scale-95 transition-all shadow-lg tracking-widest relative z-10"
         >
           שלח בקשה לקריאת טארוט אישית
         </button>
@@ -601,9 +628,9 @@
   <footer class="w-full border-t border-white/5 py-12 text-center text-xs text-slate-500 relative z-40">
     <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row-reverse justify-between items-center gap-6">
       <div class="flex gap-6 text-[9px] uppercase font-bold tracking-widest font-serif-luxury">
-        <a href="https://instagram.com" class="hover:text-[#E3BA71] transition-all">Instagram</a>
-        <a href="#booking" class="hover:text-[#E3BA71] transition-all">Privacy Policy</a>
-        <a href="#booking" class="hover:text-[#E3BA71] transition-all">Terms of Service</a>
+        <a href="https://instagram.com" class="hover:text-[#c084fc] transition-all">Instagram</a>
+        <a href="#booking" class="hover:text-[#c084fc] transition-all">Privacy Policy</a>
+        <a href="#booking" class="hover:text-[#c084fc] transition-all">Terms of Service</a>
       </div>
       <div class="text-center md:text-right space-y-1.5">
         <p class="font-serif-luxury font-bold uppercase text-white tracking-widest text-xs">C.T // KASSI TAROT</p>
@@ -625,7 +652,7 @@
         detailedMeaning: "השוטה מייצג את הארכיטיפ של הנשמה שיוצאת למסע חייה ללא דעות קדומות או פחדים מעכבים. הוא עומד על קצה המצוק, מוכן לקפוץ מדרגה - לא מתוך טיפשות, אלא מתוך הבנה אינטואיטיבית עמוקה שהיקום תמיד יפרוס תחתיו רשת ביטחון. קלף זה מזמין אותך לשחרר את הצורך בשליטה נוקשה, לסמוך על התהליך ולפתוח דף חדש ונקי.",
         advice: "תעשי קפיצת אמונה. תשחררי את הדפוסים הישנים שהגבילו אותך והרשי לעצמך להיות שוב חובבנית שיוצרת התחלה מרהיבה.",
         image: "public/tarot-deck/tarot-major-0-42043244c79fc1b1.jpg",
-        accent: "#E3BA71"
+        accent: "#c084fc"
       },
       {
         id: "magician",
@@ -636,7 +663,7 @@
         detailedMeaning: "הקוסם הוא המאסטר של החומר והרוח. על שולחנו מונחים ארבעת יסודות היקום: המטבע (חומר), המטה (רצון ותשוקה), הגביע (רגש) והחרב (אינטלקט). קלף זה מעיד שיש לך ברגע זה את כל הכלים, הכישרונות והמשאבים הנדרשים כדי לממש את שאיפותייך. החיבור בין מודעות עליונה לפעולה ארצית הוא המפתח ליצירת הקסם האישי שלך.",
         advice: "אל תמתיני לתזמון מושלם חיצוני - יש לך את כל מה שצריך כבר עכשיו. רכזי את הפוקוס ותתחילי לפעול באופן ממוקד.",
         image: "public/tarot-deck/tarot-major-1-6476367511504b5f.jpg",
-        accent: "#C19F5C"
+        accent: "#c084fc"
       },
       {
         id: "high-priestess",
@@ -647,7 +674,7 @@
         detailedMeaning: "הכוהנת הגדולה יושבת בשער המקדש, בין עמוד האור לעמוד החושך, ומחזיקה בידה את מגילת הסודות. היא אינה פועלת בעולם החיצוני, אלא מזמינה אותך לפנות פנימה - אל המים העמוקים של התת-מודע והאינטואיציה. קלף זה מסמן שהתשובות שאת מחפשת אינןהדפוסים הנוקשים של ההיגיון, אלא מתוך האמת הפנימית והקול הפנימי המנחה אותך.",
         advice: "השקיטי את רעשי הרקע. פני זמן להתבודדות, מדיטציה או כתיבה ביומן, והקשיבי לקול העדין והמדוייק שמנחה אותך מבפנים.",
         image: "public/tarot-deck/tarot-major-2-a6def1e2445cdf9f.jpg",
-        accent: "#C19F5C"
+        accent: "#c084fc"
       },
       {
         id: "empress",
@@ -658,7 +685,7 @@
         detailedMeaning: "הקיסרית היא אמא אדמה, התגלמות השפע והבריאה האורגנית ביקום. היא מזכירה לך שהחיים פועלים במחזוריות טבעית ושלא ניתן לזרז צמיחה אמיתית בכוח. קלף זה מעניק לך השראה ליצור, לחבר בין הלב לידיים, להזין את הגוף והנפש בשפע, ולהתחבר לאנרגיות של פוריות, קבלה ואהבה ללא תנאי.",
         advice: "תני אמון בקצב הצמיחה הטבעי של הדברים. הרשי לעצמך ליהנות מהחושים, להתחבר לטבע וליצור מתוך מקום של שפע וקבלה.",
         image: "public/tarot-deck/tarot-major-3-85cd590a7e0e6ec7.jpg",
-        accent: "#E3BA71"
+        accent: "#c084fc"
       },
       {
         id: "lovers",
@@ -669,7 +696,7 @@
         detailedMeaning: "מעבר לזוגיות ורומנטיקה, קלף האוהבים הוא קלף של קבלת החלטות גורליות ובחירה בנתיב הנכון לנשמתך. הוא מייצג את האיחוד בין ההיגיון לרגש, ואת הצורך להגיע להרמוניה פנימית לפני שאנו פונים החוצה. הבחירה המיוצגת בקלף אינה נעשית מתוך פחד או שיקולי כדאיות קרים, אלא מתוך אמת פנימית עמוקה שמחוברת ללב.",
         advice: "עמדי בפני החלטותייך ביושר מוחלט. בחרי בנתיב שמחבר אותך לעצמך, ותפעלי מתוך אהבה והרמוניה פנימית.",
         image: "public/tarot-deck/tarot-major-6-3baa3420cca38224.jpg",
-        accent: "#C19F5C"
+        accent: "#c084fc"
       },
       {
         id: "wheel",
@@ -680,7 +707,7 @@
         detailedMeaning: "גלגל המזל מזכיר לנו שהדבר היחיד שקבוע ביקום הוא השינוי עצמו. החיים נעים במחזוריות של גאות ושפל, אור וחושך. החוכמה הרוחנית הטמונה בקלף זה היא לא לנסות לעצור את סיבוב הגלגל או להילחם ברוח, אלא למצוא את המרכז השקט והיציב שלו - את המהות העמוקה שבך שאינה מושפעת מהטלטלות החיצוניות.",
         advice: "קבלי את המחזוריות הנוכחית של חייך באהבה. שחררי את השליטה על מה שאינו בידייך, והתמקדי בחיזוק השקט הפנימי שלך.",
         image: "public/tarot-deck/tarot-major-10-6600306b7ecf8a76.jpg",
-        accent: "#C19F5C"
+        accent: "#c084fc"
       },
       {
         id: "death",
@@ -702,7 +729,7 @@
         detailedMeaning: "השמש היא התגלמות האור, החום והבהירות המוחלטת. לאחר המסעות בנתיבי החושך והתת-מודע, השמש זורחת ומאירה את דרכך באמת צרופה. היא מייצגת חיוניות פיזית ומנטלית גבוהה, תחושת שחרור וביטחון עצמי אבסולוטי. כל מה שהיה מעורפל או ספק ספיקא מקבל תחת אור השמש בהירות והבנה עמוקה המאפשרת פריחה והצלחה.",
         advice: "זה הזמן לקרון בביטחון ולחגוג את השפע בחייך. אל תקטיני את עצמך - תני לאור הפנימי שלך להאיר את העולם ללא פילטרים.",
         image: "public/tarot-deck/tarot-major-19-d40d8ea7f0c0c263.jpg",
-        accent: "#E3BA71"
+        accent: "#c084fc"
       }
     ];
 
@@ -727,7 +754,7 @@
       }
     };
 
-    // Celestial Zodiacs Database
+    // Celestial Zodiacs Database (Purple Accent Styled)
     const horoscopeDatabase = {
       aries: { icon: "♈", titleHe: "טלה", titleEn: "Aries", general: "היום האש הפנימית שלך קורנת בעוצמה גבוהה במיוחד. תנודות פלנטריות מעניקות לך אומץ ליזום מהלך שחששת ממנו לאחרונה. אנרגיית המניפסטציה שלך בשיאה – הגדירי כיוון מדויק ופעלי.", advice: "המנעי מאימפולסיביות בשיחות אישיות, ותעלי את פרץ האנרגיה לפרויקטים יצירתיים הממתינים לך.", tarot: "הקוסם (The Magician) – כל המשאבים והכלים כבר בידיים שלך." },
       taurus: { icon: "♉", titleHe: "שור", titleEn: "Taurus", general: "היום מזמין אותך להאט ולהתחבר ליציבות הפנימית שלך. שפע ארצי מנסה להיכנס לחייך דרך שינוי תודעתי קטן. זהו יום מצוין לבסס עוגנים חדשים ולהעניק הזנה לנפש.", advice: "קבלי החלטות אישיות מתוך מקום של שקט, ואל תתני ללחצים חיצוניים להוציא אותך מאיזון.", tarot: "הקיסרית (The Empress) – התחברי לשפע, לצמיחה האורגנית ולאמא אדמה." },
@@ -746,6 +773,39 @@
     let activeCard = null;
     let isDrawing = false;
 
+    // --- GENERATE FLOATING STARS FOR HIGH-END CINEMATIC ATMOSPHERE ---
+    function generateStars() {
+      const starfield = document.getElementById("starfield");
+      const count = window.innerWidth < 768 ? 30 : 80;
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement("div");
+        star.className = "absolute bg-white rounded-full pointer-events-none";
+        
+        const size = Math.random() * 1.5 + 0.5;
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        
+        // Soft glowing purple-tinted stars
+        if (Math.random() > 0.5) {
+          star.classList.add("bg-[#c084fc]/50");
+        } else {
+          star.classList.add("bg-white/30");
+        }
+        
+        starfield.appendChild(star);
+        
+        gsap.to(star, {
+          opacity: Math.random() * 0.7 + 0.3,
+          duration: Math.random() * 3 + 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+    }
+
     // --- APPLICATION NAVIGATION (TAB CONTROL) ---
     function switchView(viewName) {
       const views = ['daily', 'tarot'];
@@ -757,13 +817,13 @@
           viewEl.classList.remove('hidden');
           gsap.fromTo(viewEl, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
           
-          navEl.classList.add('bg-white/[0.02]', 'border-[#E3BA71]/20', 'text-[#E3BA71]');
+          navEl.classList.add('bg-white/[0.02]', 'border-[#c084fc]/20', 'text-[#c084fc]');
           navEl.classList.remove('text-slate-400');
         } else {
           viewEl.classList.add('hidden');
           gsap.set(viewEl, { opacity: 0, y: 15 });
           
-          navEl.classList.remove('bg-white/[0.02]', 'border-[#E3BA71]/20', 'text-[#E3BA71]');
+          navEl.classList.remove('bg-white/[0.02]', 'border-[#c084fc]/20', 'text-[#c084fc]');
           navEl.classList.add('text-slate-400');
         }
       });
@@ -837,7 +897,7 @@
           // Load random card data
           activeCard = tarotDatabase[Math.floor(Math.random() * tarotDatabase.length)];
           document.getElementById("deck-front-img").src = activeCard.image;
-          document.getElementById("deck-card-front").style.borderColor = activeCard.accent || "#E3BA71";
+          document.getElementById("deck-card-front").style.borderColor = activeCard.accent || "#c084fc";
 
           // Step 2: High-end 3D Flip
           gsap.to(inner, {
@@ -889,7 +949,7 @@
       
       setTimeout(() => {
         submitBtn.innerText = "הבקשה התקבלה בהצלחה! 🕊️";
-        submitBtn.classList.remove("from-[#E3BA71]", "to-[#C19F5C]");
+        submitBtn.classList.remove("from-[#c084fc]", "to-[#7e22ce]");
         submitBtn.classList.add("bg-emerald-600", "text-white");
         e.target.reset();
       }, 1500);
@@ -923,6 +983,15 @@
         document.getElementById("book-spread").value = spreadValue;
       }
     }
+
+    // --- Initial Entry GSAP and Setup ---
+    window.addEventListener("DOMContentLoaded", () => {
+      generateStars();
+      
+      const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
+      tl.to("#navbar", { opacity: 1, y: 0, startAt: { y: -20 } })
+        .to("#app-viewport", { opacity: 1, y: 0, startAt: { y: 20 } }, "-=0.8");
+    });
 
     // --- Scroll progress bar logic ---
     window.addEventListener("scroll", () => {

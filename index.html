@@ -9,17 +9,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Google Fonts: Luxury Serif & Elegant Body -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
   <!-- GSAP & ScrollTrigger for fluid, butter-smooth animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    /* Premium Font Definitions */
+    /* Premium Font Definitions & Base Styles */
     body {
       font-family: 'Heebo', sans-serif;
-      background-color: #07050E;
+      background-color: #08070F; /* Deep charcoal/mystical background */
     }
     .font-cinzel {
       font-family: 'Cinzel', serif;
@@ -28,18 +28,18 @@
       font-family: 'Cormorant Garamond', serif;
     }
     
-    /* Double-Bezel (Doppelrand) Card Design */
+    /* Double-Bezel (Doppelrand) Card Design matching Dribbble luxury aesthetic */
     .double-bezel {
       box-shadow: 
-        0 0 0 1px rgba(212, 175, 55, 0.12), 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 20px 50px rgba(0, 0, 0, 0.6);
+        0 0 0 1px rgba(227, 186, 113, 0.15), 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 25px 60px rgba(0, 0, 0, 0.75);
     }
     
-    /* Film Grain Noise Background Overlay for tactile luxury velvet feel */
+    /* Tactile film grain noise overlay for luxurious feel */
     .film-grain {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.015;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.018;
       mix-blend-overlay: true;
     }
 
@@ -53,42 +53,62 @@
     .backface-hidden {
       backface-visibility: hidden;
     }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #08070F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(227, 186, 113, 0.25);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(227, 186, 113, 0.5);
+    }
   </style>
 </head>
-<body class="text-white min-h-screen selection:bg-[#D4AF37]/20 relative overflow-x-hidden antialiased">
+<body class="text-white min-h-screen selection:bg-[#E3BA71]/20 relative overflow-x-hidden antialiased">
 
   <!-- Scroll Progress Indicator -->
-  <div id="scroll-progress" class="fixed top-0 right-0 h-[3px] bg-gradient-to-l from-[#D4AF37] via-[#F3E5AB] to-[#C5A85C] z-50 transition-all duration-100" style="width: 0%"></div>
+  <div id="scroll-progress" class="fixed top-0 right-0 h-[3px] bg-gradient-to-l from-[#E3BA71] via-[#F5EAD2] to-[#C19F5C] z-50 transition-all duration-100" style="width: 0%"></div>
 
-  <!-- Ambient Cosmic Nebulae (Glowing blurred orbs behind elements) -->
-  <div class="fixed top-0 left-1/4 w-[600px] h-[600px] bg-indigo-950/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
-  <div class="fixed bottom-10 right-1/4 w-[500px] h-[500px] bg-purple-950/10 rounded-full blur-[110px] pointer-events-none z-0"></div>
+  <!-- Ambient Cosmic Nebulae (Glowing blurred atmospheric orbs) -->
+  <div class="fixed top-[-10%] left-[10%] w-[700px] h-[700px] bg-indigo-950/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[15%] right-[5%] w-[600px] h-[600px] bg-purple-950/15 rounded-full blur-[130px] pointer-events-none z-0"></div>
+  <div class="fixed top-[45%] left-[-10%] w-[500px] h-[500px] bg-amber-950/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
   <!-- Tactile Grain Overlay -->
-  <div class="fixed inset-0 bg-repeat pointer-events-none film-grain z-40 animate-pulse"></div>
+  <div class="fixed inset-0 bg-repeat pointer-events-none film-grain z-40"></div>
+
+  <!-- Floating Starfield Background Stars -->
+  <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" id="starfield"></div>
 
   <!-- NAVIGATION HEADER -->
   <header id="navbar" class="w-full max-w-7xl mx-auto px-6 py-6 flex flex-row-reverse justify-between items-center relative z-40 opacity-0">
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full border border-[#D4AF37]/40 flex items-center justify-center font-cinzel text-[#D4AF37] font-semibold text-xs shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+      <div class="w-8 h-8 rounded-full border border-[#E3BA71]/40 flex items-center justify-center font-cinzel text-[#E3BA71] font-semibold text-xs shadow-[0_0_15px_rgba(227,186,113,0.1)]">
         C
       </div>
       <div>
-        <span class="font-cinzel font-black tracking-[0.25em] text-sm uppercase text-white bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A85C]">KASSI TAROT</span>
-        <span class="text-[9px] text-[#D4AF37] tracking-[0.3em] uppercase block text-right">INTUITIVE GUIDANCE</span>
+        <span class="font-cinzel font-black tracking-[0.25em] text-sm uppercase text-white bg-clip-text text-transparent bg-gradient-to-r from-[#E3BA71] via-[#F5EAD2] to-[#C19F5C]">KASSI TAROT</span>
+        <span class="text-[9px] text-[#E3BA71] tracking-[0.3em] uppercase block text-right">INTUITIVE GUIDANCE</span>
       </div>
     </div>
     
     <nav class="hidden md:flex gap-8 text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
-      <a href="#booking" class="hover:text-[#D4AF37] transition-all duration-300">תיאום קריאה</a>
-      <a href="#blog" class="hover:text-[#D4AF37] transition-all duration-300">בלוג תודעה</a>
-      <a href="#method" class="hover:text-[#D4AF37] transition-all duration-300">הגישה שלי</a>
-      <a href="#hero" class="text-[#C5A85C] border-b border-[#D4AF37]/50 pb-1">ראשי</a>
+      <a href="#booking" class="hover:text-[#E3BA71] transition-all duration-300">תיאום קריאה</a>
+      <a href="#daily-horoscope" class="hover:text-[#E3BA71] transition-all duration-300">הורוסקופ יומי</a>
+      <a href="#blog" class="hover:text-[#E3BA71] transition-all duration-300">בלוג תודעה</a>
+      <a href="#method" class="hover:text-[#E3BA71] transition-all duration-300">הגישה שלי</a>
+      <a href="#hero" class="text-[#C19F5C] border-b border-[#E3BA71]/50 pb-1">ראשי</a>
     </nav>
 
     <a 
       href="#booking"
-      class="px-6 py-2.5 rounded-full border border-[#D4AF37]/30 text-[10px] uppercase font-black tracking-widest text-[#C5A85C] hover:bg-[#D4AF37]/10 active:scale-95 transition-all shadow-[0_4px_20px_rgba(212,175,55,0.05)]"
+      class="px-6 py-2.5 rounded-full border border-[#E3BA71]/30 text-[10px] uppercase font-black tracking-widest text-[#C19F5C] hover:bg-[#E3BA71]/10 active:scale-95 transition-all shadow-[0_4px_20px_rgba(227,186,113,0.05)]"
     >
       BOOK A READING
     </a>
@@ -97,6 +117,13 @@
   <!-- 🌌 MODULE 1: THE INTERACTIVE HERO PORTAL (FAITHFUL TO YOUR DESIGN) -->
   <section id="hero" class="relative w-full max-w-6xl mx-auto px-4 pt-4 pb-12 z-30 opacity-0">
     
+    <!-- Floating Celestial Runes positioned precisely in 3D parallax space -->
+    <div id="rune-pisces" class="absolute top-[15%] left-[2%] text-[#E3BA71]/40 font-cinzel text-xl select-none pointer-events-none opacity-0 z-20">♓</div>
+    <div id="rune-scorpio" class="absolute top-[75%] left-[5%] text-[#E3BA71]/40 font-cinzel text-xl select-none pointer-events-none opacity-0 z-20">♏</div>
+    <div id="rune-sagit" class="absolute top-[10%] right-[3%] text-[#E3BA71]/40 font-cinzel text-xl select-none pointer-events-none opacity-0 z-20">♐</div>
+    <div id="rune-libra" class="absolute top-[80%] right-[6%] text-[#E3BA71]/40 font-cinzel text-xl select-none pointer-events-none opacity-0 z-20">♎</div>
+    <div id="rune-gemini" class="absolute top-[48%] left-[12%] text-[#E3BA71]/40 font-cinzel text-xl select-none pointer-events-none opacity-0 z-20">♊</div>
+
     <!-- 16:9 Responsive Design Canvas matching the exact graphic design -->
     <div class="relative w-full aspect-[16/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 double-bezel shadow-[0_30px_80px_rgba(0,0,0,0.9)] bg-cover bg-center" style="background-image: url('public/tarot-deck/hero-bg.jpg');">
       
@@ -106,27 +133,27 @@
       <!-- 1. Left Menu Hover/Click Overlay Zones (Mapped precisely over "♡ LOVE" etc.) -->
       <div class="absolute top-[21%] left-[6.5%] w-[22.5%] h-[48%] flex flex-col justify-end gap-1.5 p-4 z-20 rounded-2xl">
         <!-- Transparent interactive zone for LOVE -->
-        <div onclick="scrollToSection('booking', 'love')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.08)] hover:border-[#D4AF37]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
-          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#D4AF37] text-[10px] font-cinzel">SELECT &rarr;</div>
+        <div onclick="scrollToSection('booking', 'love')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(227,186,113,0.08)] hover:border-[#E3BA71]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
+          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#E3BA71] text-[10px] font-cinzel">SELECT &rarr;</div>
         </div>
         <!-- Transparent interactive zone for CAREER -->
-        <div onclick="scrollToSection('booking', 'career')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.08)] hover:border-[#D4AF37]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
-          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#D4AF37] text-[10px] font-cinzel">SELECT &rarr;</div>
+        <div onclick="scrollToSection('booking', 'career')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(227,186,113,0.08)] hover:border-[#E3BA71]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
+          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#E3BA71] text-[10px] font-cinzel">SELECT &rarr;</div>
         </div>
         <!-- Transparent interactive zone for SOUL PATH -->
-        <div onclick="scrollToSection('booking', 'cross')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.08)] hover:border-[#D4AF37]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
-          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#D4AF37] text-[10px] font-cinzel">SELECT &rarr;</div>
+        <div onclick="scrollToSection('booking', 'cross')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(227,186,113,0.08)] hover:border-[#E3BA71]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
+          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#E3BA71] text-[10px] font-cinzel">SELECT &rarr;</div>
         </div>
         <!-- Transparent interactive zone for LIFE PURPOSE -->
-        <div onclick="scrollToSection('booking', 'weekly')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.08)] hover:border-[#D4AF37]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
-          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#D4AF37] text-[10px] font-cinzel">SELECT &rarr;</div>
+        <div onclick="scrollToSection('booking', 'weekly')" class="w-full h-[18%] hover:bg-white/[0.03] hover:shadow-[inset_0_0_15px_rgba(227,186,113,0.08)] hover:border-[#E3BA71]/35 border border-transparent transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-end pr-8 relative group">
+          <div class="absolute inset-y-0 left-3 flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-[#E3BA71] text-[10px] font-cinzel">SELECT &rarr;</div>
         </div>
       </div>
 
-      <!-- 2. Right Compass Gentle Motion Overlay (Aligns perfectly over the gold circle) -->
+      <!-- 2. Right Compass Gentle Motion Overlay -->
       <div class="absolute top-[21%] right-[6.5%] w-[22.5%] h-[48%] flex items-center justify-center pointer-events-none z-10">
         <!-- Thin, elegant rotating astronomical SVG compass centered over the background circle -->
-        <svg id="rotating-compass" class="w-[85%] aspect-square text-[#D4AF37]/15" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.25">
+        <svg id="rotating-compass" class="w-[85%] aspect-square text-[#E3BA71]/15" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.25">
           <circle cx="50" cy="50" r="45" stroke-dasharray="1 3" />
           <circle cx="50" cy="50" r="40" />
           <line x1="50" y1="5" x2="50" y2="95" />
@@ -144,21 +171,21 @@
           style="transform: translateY(-8%);"
         >
           <!-- Orbiting dotted outer indicator -->
-          <div id="orbit-dashed" class="absolute inset-0 border border-dashed border-[#D4AF37]/30 rounded-full scale-105 pointer-events-none"></div>
+          <div id="orbit-dashed" class="absolute inset-0 border border-dashed border-[#E3BA71]/30 rounded-full scale-105 pointer-events-none"></div>
           
           <!-- Glassmorphic Canvas Backdrop layered over static ball -->
           <div class="absolute inset-1.5 bg-gradient-to-tr from-[#0F0825]/40 via-transparent to-[#7B2CBF]/20 rounded-full backdrop-blur-[2px] flex items-center justify-center overflow-hidden">
             <canvas id="plasma-canvas" class="absolute inset-0 w-full h-full mix-blend-screen opacity-95"></canvas>
-            <div class="w-10 h-10 rounded-full bg-purple-500/10 blur-xl animate-pulse"></div>
+            <div class="w-10 h-10 rounded-full bg-[#E3BA71]/10 blur-xl animate-pulse"></div>
           </div>
           
           <!-- Hover Glow Sigil -->
           <div id="sigil-container" class="relative z-30 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <svg class="w-8 h-8 text-[#F3E5AB] filter drop-shadow-[0_0_10px_rgba(212,175,55,0.6)] animate-spin" style="animation-duration: 20s;" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.5">
+            <svg class="w-8 h-8 text-[#F5EAD2] filter drop-shadow-[0_0_10px_rgba(227,186,113,0.6)] animate-spin" style="animation-duration: 20s;" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.5">
               <circle cx="12" cy="12" r="9" />
               <path d="M12 3v18M3 12h18" />
             </svg>
-            <span class="font-cinzel text-[7px] tracking-[0.2em] font-extrabold mt-1 text-[#D4AF37]">TAP TO DRAW</span>
+            <span class="font-cinzel text-[7px] tracking-[0.2em] font-extrabold mt-1 text-[#E3BA71]">TAP TO DRAW</span>
           </div>
         </div>
       </div>
@@ -167,28 +194,33 @@
       <div id="tarot-floater" class="absolute w-[18%] h-[55%] rounded-2xl cursor-pointer pointer-events-none opacity-0 z-30 perspective-1000" style="bottom: 30%; left: 41%;">
         <div id="tarot-card-inner" class="relative w-full h-full rounded-2xl preserve-3d transition-transform duration-1000">
           
-          <!-- BACK SIDE -->
-          <div class="absolute inset-0 w-full h-full bg-[#110925] rounded-2xl border-2 border-[#D4AF37]/45 flex flex-col justify-between p-4 backface-hidden double-bezel shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-            <div class="w-full flex justify-between text-[8px] font-serif text-[#D4AF37]/40 font-bold">
+          <!-- BACK SIDE (Stunning fine-line cosmic gold-foiled geometry) -->
+          <div class="absolute inset-0 w-full h-full bg-[#0D0B14] rounded-2xl border-2 border-[#E3BA71]/45 flex flex-col justify-between p-4 backface-hidden double-bezel shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+            <div class="w-full flex justify-between text-[8px] font-serif text-[#E3BA71]/40 font-bold">
               <span>XIII</span>
               <span>K.T</span>
             </div>
-            <div class="w-10 h-10 mx-auto rounded-full border border-[#D4AF37]/20 flex items-center justify-center text-[#D4AF37]/30">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.5">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 3v18M3 12h18" />
+            
+            <!-- Beautiful solar-mandala SVG icon in the center -->
+            <div class="w-14 h-14 mx-auto rounded-full border border-[#E3BA71]/20 flex items-center justify-center text-[#E3BA71]/60 relative">
+              <svg class="w-10 h-10 animate-spin" style="animation-duration: 40s;" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="0.25">
+                <circle cx="12" cy="12" r="8" stroke-dasharray="1 2" />
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 2v20M2 12h20M5 5l14 14M5 19L14 5" />
               </svg>
+              <div class="absolute w-2 h-2 rounded-full bg-[#E3BA71] blur-[1px]"></div>
             </div>
-            <div class="w-full flex justify-between text-[8px] font-serif text-[#D4AF37]/40 font-bold rotate-180">
+
+            <div class="w-full flex justify-between text-[8px] font-serif text-[#E3BA71]/40 font-bold rotate-180">
               <span>XIII</span>
               <span>K.T</span>
             </div>
           </div>
 
           <!-- FRONT SIDE (Rider-Waite) -->
-          <div id="tarot-card-front" class="absolute inset-0 w-full h-full bg-[#150F26] rounded-2xl border-2 flex flex-col justify-between backface-hidden [transform:rotateY(180deg)] shadow-2xl overflow-hidden" style="border-color: #D4AF37">
+          <div id="tarot-card-front" class="absolute inset-0 w-full h-full bg-[#150F26] rounded-2xl border-2 flex flex-col justify-between backface-hidden [transform:rotateY(180deg)] shadow-2xl overflow-hidden" style="border-color: #E3BA71">
             <div class="relative w-full h-full">
-              <div class="absolute inset-1.5 border border-[#D4AF37]/25 rounded-xl pointer-events-none z-10"></div>
+              <div class="absolute inset-1.5 border border-[#E3BA71]/25 rounded-xl pointer-events-none z-10"></div>
               <img id="tarot-front-img" src="" alt="Tarot Card" class="w-full h-full object-cover rounded-2xl" />
             </div>
           </div>
@@ -200,20 +232,138 @@
 
     <!-- Active Drawer Hint / Status indicator -->
     <div class="mt-6 flex flex-col items-center justify-center text-center gap-1.5">
-      <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse"></span>
-      <p id="action-hint" class="text-[#D4AF37] font-cinzel text-[10px] tracking-[0.25em] font-black uppercase pointer-events-none">
+      <span class="w-1.5 h-1.5 bg-[#E3BA71] rounded-full animate-pulse"></span>
+      <p id="action-hint" class="text-[#E3BA71] font-cinzel text-[10px] tracking-[0.25em] font-black uppercase pointer-events-none">
         — לחצי על כדור הבדולח במרכז כדי לפתוח קלף —
       </p>
     </div>
 
   </section>
 
+  <!-- 🌟 EXCLUSIVE MODULE: DAILY FORTUNE & ZODIACS (DRIBBBLE-TIER BENTO) -->
+  <section id="daily-horoscope" class="relative w-full max-w-7xl mx-auto px-6 py-20 border-t border-white/5 z-30">
+    <div class="max-w-4xl mx-auto text-center space-y-4 mb-12">
+      <span class="text-[10px] text-[#E3BA71] font-extrabold uppercase tracking-widest font-cinzel">daily fortune</span>
+      <h2 class="text-3xl md:text-5xl font-cinzel font-semibold text-white">הורוסקופ יומי וסודות הכוכבים</h2>
+      <p class="text-slate-400 text-xs md:text-sm font-semibold max-w-lg mx-auto leading-relaxed">
+        גלי את הסודות ואת תנודות האנרגיה הקוסמיות המלוות את המזל שלך היום. בחרי את המזל שלך לקריאה מיידית.
+      </p>
+    </div>
+
+    <!-- Bento Zodiac Grid (Elegant fine lines & gold-tinted active glass cards) -->
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 max-w-5xl mx-auto" id="zodiac-grid">
+      <!-- Aries -->
+      <div onclick="fetchHoroscope('aries')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♈</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">טלה</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Aries</span>
+      </div>
+      <!-- Taurus -->
+      <div onclick="fetchHoroscope('taurus')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♉</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">שור</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Taurus</span>
+      </div>
+      <!-- Gemini -->
+      <div onclick="fetchHoroscope('gemini')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♊</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">תאומים</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Gemini</span>
+      </div>
+      <!-- Cancer -->
+      <div onclick="fetchHoroscope('cancer')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♋</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">סרטן</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Cancer</span>
+      </div>
+      <!-- Leo -->
+      <div onclick="fetchHoroscope('leo')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♌</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">אריה</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Leo</span>
+      </div>
+      <!-- Virgo -->
+      <div onclick="fetchHoroscope('virgo')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♍</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">בתולה</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Virgo</span>
+      </div>
+      <!-- Libra -->
+      <div onclick="fetchHoroscope('libra')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♎</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">מאזניים</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Libra</span>
+      </div>
+      <!-- Scorpio -->
+      <div onclick="fetchHoroscope('scorpio')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♏</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">עקרב</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Scorpio</span>
+      </div>
+      <!-- Sagittarius -->
+      <div onclick="fetchHoroscope('sagittarius')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♐</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">קשת</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Sagittarius</span>
+      </div>
+      <!-- Capricorn -->
+      <div onclick="fetchHoroscope('capricorn')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♑</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">גדי</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Capricorn</span>
+      </div>
+      <!-- Aquarius -->
+      <div onclick="fetchHoroscope('aquarius')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♒</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">דלי</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Aquarius</span>
+      </div>
+      <!-- Pisces -->
+      <div onclick="fetchHoroscope('pisces')" class="bg-[#121021]/40 border border-white/5 hover:border-[#E3BA71]/40 hover:bg-[#121021]/80 rounded-2xl p-4 text-center cursor-pointer transition-all duration-300 group shadow-md double-bezel relative overflow-hidden flex flex-col items-center justify-center gap-2 aspect-square">
+        <span class="text-[#E3BA71]/80 text-2xl font-cinzel group-hover:scale-110 group-hover:text-[#F5EAD2] transition-all">♓</span>
+        <span class="text-[10px] font-black tracking-widest uppercase text-slate-400 group-hover:text-white transition-all">דגים</span>
+        <span class="text-[7px] text-slate-600 tracking-wider">Pisces</span>
+      </div>
+    </div>
+
+    <!-- Active Horoscope Reveal Card (GSAP Animated) -->
+    <div id="horoscope-reveal" class="max-w-2xl mx-auto mt-12 bg-[#121021]/80 border border-[#E3BA71]/25 p-8 rounded-[2.5rem] double-bezel text-right relative hidden opacity-0 translate-y-4 transition-all duration-500">
+      <div class="absolute inset-2 border border-[#E3BA71]/5 rounded-[2rem] pointer-events-none"></div>
+      
+      <div class="flex flex-row-reverse justify-between items-center border-b border-white/5 pb-4 mb-4 relative z-10">
+        <div class="flex items-center gap-3">
+          <div id="reveal-icon" class="w-12 h-12 rounded-full border border-[#E3BA71]/30 flex items-center justify-center text-xl text-[#E3BA71]">♈</div>
+          <div>
+            <h3 id="reveal-title-he" class="font-cinzel font-black text-xl text-white">הורוסקופ יומי: טלה</h3>
+            <p id="reveal-title-en" class="text-[8px] text-[#E3BA71] uppercase tracking-[0.2em] mt-0.5">Daily Forecast // Aries</p>
+          </div>
+        </div>
+        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider">MAY 30, 2026 // TODAY</span>
+      </div>
+
+      <div class="space-y-4 relative z-10">
+        <p id="reveal-general" class="text-[#F5EAD2]/90 font-bold text-sm leading-relaxed"></p>
+        
+        <div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+          <div class="bg-[#121021]/60 p-4 rounded-xl border border-white/5">
+            <span class="text-[8px] text-[#E3BA71] font-black tracking-wider block">⚖️ המלצה לאיזון קוסמי</span>
+            <p id="reveal-advice" class="text-slate-300 text-xs mt-1 leading-relaxed"></p>
+          </div>
+          <div class="bg-[#121021]/60 p-4 rounded-xl border border-white/5">
+            <span class="text-[8px] text-[#E3BA71] font-black tracking-wider block">🔮 קלף מנחה להיום</span>
+            <p id="reveal-tarot-guide" class="text-slate-300 text-xs mt-1 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- INTERACTIVE MODAL FOR TAROT INTERPRETATION (Gold Chased Drawer) -->
   <div id="reading-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
-    <div class="bg-[#110925] border border-[#D4AF37]/35 rounded-[2.5rem] max-w-2xl w-full p-8 md:p-12 text-right relative shadow-2xl double-bezel">
+    <div class="bg-[#110925] border border-[#E3BA71]/35 rounded-[2.5rem] max-w-2xl w-full p-8 md:p-12 text-right relative shadow-2xl double-bezel">
       
       <!-- Inner thin border frame -->
-      <div class="absolute inset-2 border border-[#D4AF37]/10 rounded-[2rem] pointer-events-none"></div>
+      <div class="absolute inset-2 border border-[#E3BA71]/10 rounded-[2rem] pointer-events-none"></div>
       
       <!-- Close Button -->
       <button 
@@ -225,19 +375,19 @@
 
       <div class="space-y-6 relative z-10">
         <div class="flex flex-row-reverse items-center justify-between border-b border-white/5 pb-4">
-          <div id="modal-card-badge" class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#311C54] to-[#1C0E34] border border-[#D4AF37]/30 flex items-center justify-center text-[#C5A85C] shadow-lg">
+          <div id="modal-card-badge" class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#311C54] to-[#1C0E34] border border-[#E3BA71]/30 flex items-center justify-center text-[#C19F5C] shadow-lg">
             <span id="modal-card-num" class="font-cinzel text-xl font-black">0</span>
           </div>
           <div class="text-right">
             <h3 id="modal-card-title-he" class="font-cinzel font-black text-white text-3xl">השוטה</h3>
-            <p id="modal-card-title-en" class="text-xs text-[#D4AF37] font-bold uppercase tracking-[0.2em] mt-1">THE FOOL // ARCANA 0</p>
+            <p id="modal-card-title-en" class="text-xs text-[#E3BA71] font-bold uppercase tracking-[0.2em] mt-1">THE FOOL // ARCANA 0</p>
           </div>
         </div>
 
         <div class="space-y-5 text-right">
           <div>
             <span class="text-[10px] text-slate-500 font-extrabold uppercase tracking-widest">האנרגיה המזוקקת</span>
-            <p id="modal-card-meaning" class="text-[#F3E5AB]/90 font-bold text-sm leading-relaxed mt-1"></p>
+            <p id="modal-card-meaning" class="text-[#F5EAD2]/90 font-bold text-sm leading-relaxed mt-1"></p>
           </div>
 
           <div>
@@ -245,9 +395,9 @@
             <p id="modal-card-details" class="text-slate-400 font-semibold text-xs leading-relaxed mt-1.5"></p>
           </div>
 
-          <div class="bg-[#D4AF37]/5 border border-[#D4AF37]/15 p-5 rounded-2xl">
-            <span class="text-[10px] text-[#D4AF37] font-black uppercase tracking-widest block">🕯️ עצת הקלף לשבוע הקרוב</span>
-            <p id="modal-card-advice" class="text-[#F3E5AB]/90 font-bold text-xs leading-relaxed mt-1.5"></p>
+          <div class="bg-[#E3BA71]/5 border border-[#E3BA71]/15 p-5 rounded-2xl">
+            <span class="text-[10px] text-[#E3BA71] font-black uppercase tracking-widest block">🕯️ עצת הקלף לשבוע הקרוב</span>
+            <p id="modal-card-advice" class="text-[#F5EAD2]/90 font-bold text-xs leading-relaxed mt-1.5"></p>
           </div>
         </div>
       </div>
@@ -260,13 +410,13 @@
       
       <div class="space-y-6 text-right order-2 lg:order-1">
         <div class="flex items-center gap-2 justify-end">
-          <span class="w-2 h-0.5 bg-[#D4AF37]"></span>
-          <span class="text-[10px] text-[#D4AF37] font-extrabold uppercase tracking-widest font-cinzel">THE MODERN METHOD</span>
+          <span class="w-2 h-0.5 bg-[#E3BA71]"></span>
+          <span class="text-[10px] text-[#E3BA71] font-extrabold uppercase tracking-widest font-cinzel">THE MODERN METHOD</span>
         </div>
         
         <h2 class="text-3xl md:text-5xl font-cinzel font-black text-white leading-tight">
           הטארוט ככלי מעצים <br />
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] to-[#C5A85C]">ולא כנבואה עתידית</span>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#E3BA71] to-[#C19F5C]">ולא כנבואה עתידית</span>
         </h2>
 
         <p class="text-slate-400 text-xs md:text-sm font-semibold leading-relaxed">
@@ -275,14 +425,14 @@
 
         <div class="space-y-4 pt-4">
           <div class="flex flex-row-reverse gap-4 items-start">
-            <span class="text-[#D4AF37] font-serif font-bold text-lg">01</span>
+            <span class="text-[#E3BA71] font-serif font-bold text-lg">01</span>
             <div>
               <h4 class="font-cinzel font-black text-white text-base">קריאות פסיכולוגיות מעצימות</h4>
               <p class="text-slate-400 text-xs mt-1">חיבור של הקלפים לחיים האמיתיים שלך, לחרדות ולשאיפות שמעסיקות אותך ביומיום.</p>
             </div>
           </div>
           <div class="flex flex-row-reverse gap-4 items-start">
-            <span class="text-[#D4AF37] font-serif font-bold text-lg">02</span>
+            <span class="text-[#E3BA71] font-serif font-bold text-lg">02</span>
             <div>
               <h4 class="font-cinzel font-black text-white text-base">ניפוץ מיתוסים ופחד</h4>
               <p class="text-slate-400 text-xs mt-1">אני מלמדת אותך למה קלפים 'מפחידים' כמו המוות, המגדל או השטן הם בעצם ברכות המאפשרות שחרור ופריחה מחדש.</p>
@@ -294,14 +444,14 @@
       <!-- Double-bezel Showcase Card -->
       <div class="relative max-w-md mx-auto order-1 lg:order-2">
         <div class="absolute inset-0 bg-gradient-to-tr from-purple-800/10 to-amber-500/5 rounded-[3rem] blur-[30px]"></div>
-        <div class="relative bg-[#110925]/80 border border-[#D4AF37]/20 p-8 rounded-[3rem] double-bezel text-right space-y-6">
-          <span class="text-[9px] text-[#D4AF37] font-extrabold uppercase tracking-widest font-cinzel">WORDS FROM CASSIE</span>
-          <p class="text-[#F3E5AB]/95 font-cinzel font-bold italic text-base leading-relaxed">
+        <div class="relative bg-[#110925]/80 border border-[#E3BA71]/20 p-8 rounded-[3rem] double-bezel text-right space-y-6">
+          <span class="text-[9px] text-[#E3BA71] font-extrabold uppercase tracking-widest font-cinzel">WORDS FROM CASSIE</span>
+          <p class="text-[#F5EAD2]/95 font-cinzel font-bold italic text-base leading-relaxed">
             "הקלפים לא קובעים מי תהיי מחר. הם רק מראים לך איפה את עומדת היום, כדי שתוכלי לברוא את המחר שאת רוצה."
           </p>
           <div class="flex items-center gap-3 justify-end pt-3">
             <span class="text-xs text-slate-400 font-bold uppercase tracking-wider font-cinzel">Cassie // קאסי טארוט</span>
-            <div class="w-8 h-8 rounded-full bg-[#110925] border border-[#D4AF37]/35 flex items-center justify-center font-bold font-serif text-[10px] text-[#C5A85C]">
+            <div class="w-8 h-8 rounded-full bg-[#110925] border border-[#E3BA71]/35 flex items-center justify-center font-bold font-serif text-[10px] text-[#C19F5C]">
               CT
             </div>
           </div>
@@ -315,7 +465,7 @@
   <section id="blog" class="relative w-full max-w-7xl mx-auto px-6 py-28 border-t border-white/5 z-30">
     
     <div class="text-center max-w-xl mx-auto space-y-3 mb-20">
-      <span class="text-[10px] text-[#D4AF37] font-extrabold uppercase tracking-widest font-cinzel">COSMIC INSIGHTS & WISDOM</span>
+      <span class="text-[10px] text-[#E3BA71] font-extrabold uppercase tracking-widest font-cinzel">COSMIC INSIGHTS & WISDOM</span>
       <h2 class="text-3xl md:text-5xl font-cinzel font-black text-white">בלוג השראה ותודעה קוסמית</h2>
       <p class="text-indigo-200/50 text-xs md:text-sm font-semibold leading-relaxed">
         מאמרי עומק, ריטואלים שבועיים ותובנות רוחניות ופסיכולוגיות שיעזרו לך לנווט בעליות ובמורדות של מסע חייך.
@@ -325,13 +475,13 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       
       <!-- Article 1 -->
-      <div class="bg-[#110925]/60 border border-white/5 hover:border-[#D4AF37]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
+      <div class="bg-[#121021]/60 border border-white/5 hover:border-[#E3BA71]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-cinzel">
-            <span class="text-[#D4AF37]">פסיכולוגיה וטארוט</span>
+            <span class="text-[#E3BA71]">פסיכולוגיה וטארוט</span>
             <span>28 במאי 2026</span>
           </div>
-          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C5A85C] transition-colors leading-snug">
+          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C19F5C] transition-colors leading-snug">
             למה קלף המוות הוא בעצם הברכה הגדולה ביותר של חייך
           </h3>
           <p class="text-slate-400 text-xs font-semibold leading-relaxed">
@@ -339,19 +489,19 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('death')" class="text-[10px] font-black tracking-wider text-[#C5A85C] hover:text-[#F3E5AB] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
+          <button onclick="openBlog('death')" class="text-[10px] font-black tracking-wider text-[#C19F5C] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
           <span class="text-[9px] text-slate-500 font-bold uppercase font-cinzel">5 min read</span>
         </div>
       </div>
 
       <!-- Article 2 -->
-      <div class="bg-[#110925]/60 border border-white/5 hover:border-[#D4AF37]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
+      <div class="bg-[#121021]/60 border border-white/5 hover:border-[#E3BA71]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-cinzel">
-            <span class="text-[#D4AF37]">רוחניות מודרנית</span>
+            <span class="text-[#E3BA71]">רוחניות מודרנית</span>
             <span>14 במאי 2026</span>
           </div>
-          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C5A85C] transition-colors leading-snug">
+          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C19F5C] transition-colors leading-snug">
             הטארוט כראי פסיכולוגי: המעבר מחיזוי פסיבי לבוראות פעילה
           </h3>
           <p class="text-slate-400 text-xs font-semibold leading-relaxed">
@@ -359,19 +509,19 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('mirror')" class="text-[10px] font-black tracking-wider text-[#C5A85C] hover:text-[#F3E5AB] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
+          <button onclick="openBlog('mirror')" class="text-[10px] font-black tracking-wider text-[#C19F5C] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
           <span class="text-[9px] text-slate-500 font-bold uppercase font-cinzel">4 min read</span>
         </div>
       </div>
 
       <!-- Article 3 -->
-      <div class="bg-[#110925]/60 border border-white/5 hover:border-[#D4AF37]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
+      <div class="bg-[#121021]/60 border border-white/5 hover:border-[#E3BA71]/25 rounded-[2.5rem] p-8 text-right flex flex-col justify-between gap-6 transition-all duration-500 group shadow-lg double-bezel">
         <div class="space-y-4">
           <div class="flex justify-between items-center flex-row-reverse text-[9px] font-bold tracking-widest text-slate-500 uppercase font-cinzel">
-            <span class="text-[#D4AF37]">כלים מעשיים</span>
+            <span class="text-[#E3BA71]">כלים מעשיים</span>
             <span>05 במאי 2026</span>
           </div>
-          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C5A85C] transition-colors leading-snug">
+          <h3 class="font-cinzel font-black text-white text-xl group-hover:text-[#C19F5C] transition-colors leading-snug">
             3 שאלות התבוננות בהשראת אנרגיית הקוסם (The Magician)
           </h3>
           <p class="text-slate-400 text-xs font-semibold leading-relaxed">
@@ -379,7 +529,7 @@
           </p>
         </div>
         <div class="flex justify-between items-center flex-row-reverse border-t border-white/5 pt-4">
-          <button onclick="openBlog('magician-art')" class="text-[10px] font-black tracking-wider text-[#C5A85C] hover:text-[#F3E5AB] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
+          <button onclick="openBlog('magician-art')" class="text-[10px] font-black tracking-wider text-[#C19F5C] hover:text-[#F5EAD2] transition-colors cursor-pointer">קראי מאמר מלא ←</button>
           <span class="text-[9px] text-slate-500 font-bold uppercase font-cinzel">3 min read</span>
         </div>
       </div>
@@ -389,10 +539,10 @@
 
   <!-- EDITORIAL BLOG READER MODAL (Drawer) -->
   <div id="blog-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
-    <div class="bg-[#110925] border border-[#D4AF37]/30 rounded-[2.5rem] max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8 md:p-12 text-right relative shadow-2xl double-bezel">
+    <div class="bg-[#110925] border border-[#E3BA71]/30 rounded-[2.5rem] max-w-3xl w-full max-h-[85vh] overflow-y-auto p-8 md:p-12 text-right relative shadow-2xl double-bezel">
       
       <!-- Inner Gold Bezel -->
-      <div class="absolute inset-2 border border-[#D4AF37]/10 rounded-[2rem] pointer-events-none"></div>
+      <div class="absolute inset-2 border border-[#E3BA71]/10 rounded-[2rem] pointer-events-none"></div>
 
       <!-- Close Button -->
       <button 
@@ -404,7 +554,7 @@
 
       <div class="space-y-6 relative z-10">
         <div class="flex justify-between items-center flex-row-reverse text-[10px] font-bold tracking-widest text-slate-500 uppercase font-cinzel pt-2 border-b border-white/5 pb-4">
-          <span id="blog-modal-category" class="text-[#D4AF37]"></span>
+          <span id="blog-modal-category" class="text-[#E3BA71]"></span>
           <span id="blog-modal-date"></span>
         </div>
 
@@ -420,7 +570,7 @@
     <div class="max-w-xl mx-auto space-y-8">
       
       <div class="text-center space-y-3">
-        <span class="text-[10px] text-[#D4AF37] font-extrabold uppercase tracking-widest font-cinzel">PRIVATE HEAVENLY READING</span>
+        <span class="text-[10px] text-[#E3BA71] font-extrabold uppercase tracking-widest font-cinzel">PRIVATE HEAVENLY READING</span>
         <h2 class="text-3xl md:text-5xl font-cinzel font-black text-white">תיאום קריאה אישית</h2>
         <p class="text-indigo-200/50 text-xs md:text-sm font-semibold leading-relaxed">
           מעוניינת לצלול לעומק הדילמות שלך, לקבל הכוונה מדויקת ומפת דרכים מפורטת לנשמה? מלאי את הפרטים, ואחזור אלייך באופן אישי.
@@ -428,7 +578,7 @@
       </div>
 
       <form id="booking-form" class="bg-[#110925]/90 border border-white/5 rounded-[2.5rem] p-8 md:p-10 shadow-2xl text-right space-y-6 double-bezel relative">
-        <div class="absolute inset-2 border border-[#D4AF37]/5 rounded-[2rem] pointer-events-none"></div>
+        <div class="absolute inset-2 border border-[#E3BA71]/5 rounded-[2rem] pointer-events-none"></div>
 
         <div class="space-y-1.5 relative z-10">
           <label class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest block">כיצד לקרוא לך? (שם מלא)</label>
@@ -437,7 +587,7 @@
             id="book-name"
             required
             placeholder="הכניסי את שמך..."
-            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#D4AF37]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-600 text-white"
+            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-600 text-white"
             dir="rtl"
           />
         </div>
@@ -449,7 +599,7 @@
             id="book-email"
             required
             placeholder="כתובת האימייל שלך..."
-            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#D4AF37]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-600 text-white"
+            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all placeholder:text-slate-600 text-white"
             dir="rtl"
           />
         </div>
@@ -458,7 +608,7 @@
           <label class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest block">סגנון הפריסה הרצוי</label>
           <select 
             id="book-spread"
-            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#D4AF37]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all cursor-pointer text-white"
+            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-3.5 text-xs text-right focus:outline-none transition-all cursor-pointer text-white"
             dir="rtl"
           >
             <option value="weekly">קריאת הכוונה שבועית מורחבת (3 קלפים)</option>
@@ -473,14 +623,14 @@
           <textarea 
             id="book-question"
             placeholder="שתפי אותי במה שמעסיק אותך, כדי שאוכל להכין את הפריסה במיוחד עבורך..."
-            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#D4AF37]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-4 text-xs text-right focus:outline-none transition-all h-32 resize-none placeholder:text-slate-600 leading-relaxed scrollbar-thin text-white"
+            class="w-full bg-[#0E071F] border border-white/10 hover:border-white/20 focus:border-[#E3BA71]/50 focus:bg-[#150F2C] rounded-2xl px-4 py-4 text-xs text-right focus:outline-none transition-all h-32 resize-none placeholder:text-slate-600 leading-relaxed scrollbar-thin text-white"
             dir="rtl"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          class="w-full py-4 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A85C] text-slate-950 font-black text-xs rounded-2xl hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] active:scale-95 transition-all shadow-lg tracking-widest relative z-10"
+          class="w-full py-4 bg-gradient-to-r from-[#E3BA71] via-[#F5EAD2] to-[#C19F5C] text-slate-950 font-black text-xs rounded-2xl hover:shadow-[0_0_20px_rgba(227,186,113,0.2)] active:scale-95 transition-all shadow-lg tracking-widest relative z-10"
         >
           שלח בקשה לקריאת טארוט אישית
         </button>
@@ -493,12 +643,12 @@
   <footer class="w-full border-t border-white/5 py-12 text-center text-xs text-slate-500 relative z-40">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row-reverse justify-between items-center gap-6">
       <div class="flex gap-6 text-[10px] uppercase font-bold tracking-widest font-cinzel">
-        <a href="https://instagram.com" class="hover:text-[#C5A85C] transition-all">Instagram</a>
-        <a href="#booking" class="hover:text-[#C5A85C] transition-all">Privacy Policy</a>
-        <a href="#booking" class="hover:text-[#C5A85C] transition-all">Terms of Service</a>
+        <a href="https://instagram.com" class="hover:text-[#C19F5C] transition-all">Instagram</a>
+        <a href="#booking" class="hover:text-[#C19F5C] transition-all">Privacy Policy</a>
+        <a href="#booking" class="hover:text-[#C19F5C] transition-all">Terms of Service</a>
       </div>
       <div class="text-center md:text-right space-y-1.5">
-        <p class="font-cinzel font-black uppercase text-white tracking-widest text-sm bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] to-[#C5A85C]">C.T // KASSI TAROT</p>
+        <p class="font-cinzel font-black uppercase text-white tracking-widest text-sm bg-clip-text text-transparent bg-gradient-to-r from-[#E3BA71] to-[#C19F5C]">C.T // KASSI TAROT</p>
         <p class="text-[10px]">© 2026 Kassi Tarot. Built with elite double-bezel spatial design. All rights reserved.</p>
       </div>
     </div>
@@ -517,7 +667,7 @@
         detailedMeaning: "השוטה מייצג את הארכיטיפ של הנשמה שיוצאת למסע חייה ללא דעות קדומות או פחדים מעכבים. הוא עומד על קצה המצוק, מוכן לקפוץ מדרגה - לא מתוך טיפשות, אלא מתוך הבנה אינטואיטיבית עמוקה שהיקום תמיד יפרוס תחתיו רשת ביטחון. קלף זה מזמין אותך לשחרר את הצורך בשליטה נוקשה, לסמוך על התהליך ולפתוח דף חדש ונקי.",
         advice: "תעשי קפיצת אמונה. תשחררי את הדפוסים הישנים שהגבילו אותך והרשי לעצמך להיות שוב חובבנית שיוצרת התחלה מרהיבה.",
         image: "public/tarot-deck/tarot-major-0-42043244c79fc1b1.jpg",
-        accent: "#D4AF37"
+        accent: "#E3BA71"
       },
       {
         id: "magician",
@@ -528,7 +678,7 @@
         detailedMeaning: "הקוסם הוא המאסטר של החומר והרוח. על שולחנו מונחים ארבעת יסודות היקום: המטבע (חומר), המטה (רצון ותשוקה), הגביע (רגש) והחרב (אינטלקט). קלף זה מעיד שיש לך ברגע זה את כל הכלים, הכישרונות והמשאבים הנדרשים כדי לממש את שאיפותייך. החיבור בין מודעות עליונה לפעולה ארצית הוא המפתח ליצירת הקסם האישי שלך.",
         advice: "אל תמתיני לתזמון מושלם חיצוני - יש לך את כל מה שצריך כבר עכשיו. רכזי את הפוקוס ותתחילי לפעול באופן ממוקד.",
         image: "public/tarot-deck/tarot-major-1-6476367511504b5f.jpg",
-        accent: "#C5A85C"
+        accent: "#C19F5C"
       },
       {
         id: "high-priestess",
@@ -539,7 +689,7 @@
         detailedMeaning: "הכוהנת הגדולה יושבת בשער המקדש, בין עמוד האור לעמוד החושך, ומחזיקה בידה את מגילת הסודות. היא אינה פועלת בעולם החיצוני, אלא מזמינה אותך לפנות פנימה - אל המים העמוקים של התת-מודע והאינטואיציה. קלף זה מסמן שהתשובות שאת מחפשת אינןהדפוסים הנוקשים של ההיגיון, אלא מתוך האמת הפנימית והקול הפנימי המנחה אותך.",
         advice: "השקיטי את רעשי הרקע. פני זמן להתבודדות, מדיטציה או כתיבה ביומן, והקשיבי לקול העדין והמדוייק שמנחה אותך מבפנים.",
         image: "public/tarot-deck/tarot-major-2-a6def1e2445cdf9f.jpg",
-        accent: "#B89742"
+        accent: "#C19F5C"
       },
       {
         id: "empress",
@@ -550,7 +700,7 @@
         detailedMeaning: "הקיסרית היא אמא אדמה, התגלמות השפע והבריאה האורגנית ביקום. היא מזכירה לך שהחיים פועלים במחזוריות טבעית ושלא ניתן לזרז צמיחה אמיתית בכוח. קלף זה מעניק לך השראה ליצור, לחבר בין הלב לידיים, להזין את הגוף והנפש בשפע, ולהתחבר לאנרגיות של פוריות, קבלה ואהבה ללא תנאי.",
         advice: "תני אמון בקצב הצמיחה הטבעי של הדברים. הרשי לעצמך ליהנות מהחושים, להתחבר לטבע וליצור מתוך מקום של שפע וקבלה.",
         image: "public/tarot-deck/tarot-major-3-85cd590a7e0e6ec7.jpg",
-        accent: "#D4AF37"
+        accent: "#E3BA71"
       },
       {
         id: "lovers",
@@ -561,7 +711,7 @@
         detailedMeaning: "מעבר לזוגיות ורומנטיקה, קלף האוהבים הוא קלף של קבלת החלטות גורליות ובחירה בנתיב הנכון לנשמתך. הוא מייצג את האיחוד בין ההיגיון לרגש, ואת הצורך להגיע להרמוניה פנימית לפני שאנו פונים החוצה. הבחירה המיוצגת בקלף אינה נעשית מתוך פחד או שיקולי כדאיות קרים, אלא מתוך אמת פנימית עמוקה שמחוברת ללב.",
         advice: "עמדי בפני החלטותייך ביושר מוחלט. בחרי בנתיב שמחבר אותך לעצמך, ותפעלי מתוך אהבה והרמוניה פנימית.",
         image: "public/tarot-deck/tarot-major-6-3baa3420cca38224.jpg",
-        accent: "#C5A85C"
+        accent: "#C19F5C"
       },
       {
         id: "wheel",
@@ -572,7 +722,7 @@
         detailedMeaning: "גלגל המזל מזכיר לנו שהדבר היחיד שקבוע ביקום הוא השינוי עצמו. החיים נעים במחזוריות של גאות ושפל, אור וחושך. החוכמה הרוחנית הטמונה בקלף זה היא לא לנסות לעצור את סיבוב הגלגל או להילחם ברוח, אלא למצוא את המרכז השקט והיציב שלו - את המהות העמוקה שבך שאינה מושפעת מהטלטלות החיצוניות.",
         advice: "קבלי את המחזוריות הנוכחית של חייך באהבה. שחררי את השליטה על מה שאינו בידייך, והתמקדי בחיזוק השקט הפנימי שלך.",
         image: "public/tarot-deck/tarot-major-10-6600306b7ecf8a76.jpg",
-        accent: "#B58C3D"
+        accent: "#C19F5C"
       },
       {
         id: "death",
@@ -594,7 +744,7 @@
         detailedMeaning: "השמש היא התגלמות האור, החום והבהירות המוחלטת. לאחר המסעות בנתיבי החושך והתת-מודע, השמש זורחת ומאירה את דרכך באמת צרופה. היא מייצגת חיוניות פיזית ומנטלית גבוהה, תחושת שחרור וביטחון עצמי אבסולוטי. כל מה שהיה מעורפל או ספק ספיקא מקבל תחת אור השמש בהירות והבנה עמוקה המאפשרת פריחה והצלחה.",
         advice: "זה הזמן לקרון בביטחון ולחגוג את השפע בחייך. אל תקטיני את עצמך - תני לאור הפנימי שלך להאיר את העולם ללא פילטרים.",
         image: "public/tarot-deck/tarot-major-19-d40d8ea7f0c0c263.jpg",
-        accent: "#D4AF37"
+        accent: "#E3BA71"
       }
     ];
 
@@ -603,50 +753,164 @@
         category: "פסיכולוגיה וטארוט",
         date: "28 במאי 2026",
         title: "למה קלף המוות הוא בעצם הברכה הגדולה ביותר של חייך",
-        content: `כשקלף המוות (Death) עולה בפריסת טארוט, רוב האנשים חווים רתיעה אינסטינקטיבית. השלד הניבט מהקלף, הצבעים הכהים והאסוציאציה למילה 'מוות' מייצרים מיד חרדה. 
-אך האמת בעולם הטארוט הפוכה לחלוטין: קלף המוות הוא אחת הברכות המפוארות ביותר שיכולות להופיע בדרך שלך.
-
-בטארוט, המוות אינו פיזי – הוא סימבולי. הוא מייצג את החוק הקוסמי הגדול ביותר של הבריאה: אי אפשר לברוא משהו חדש בלי לפנות לו מקום. המוות הוא השלכת העלים היבשים בסתיו, הפירוק של הקיים כדי להפוך לדשן שממנו יצמח האביב הבא.
-
-אם את נאחזת בכוח במערכת יחסים שסחטה את נשמתך, בעבודה שכבר אינה מפרה אותך, או בדפוס מחשבה שמקטין אותך ונובע מחרדה – את חוסמת את הנסים שהיקום מנסה להביא לחייך. קלף המוות מגיע ואומר לך בעדינות אך בנחישות: די. הגיע הזמן לשחרר.
-
-איך לעבוד עם האנרגיה הזו השבוע?
-1. כתיבה ביומן: שאלי את עצמך – מה הדבר שאני נאחזת בו רק מתוך פחד משינוי, למרות שאני יודעת שהאנרגיה שלו כבר גוועה?
-2. טקסיות של שחרור: תני לעצמך רשות לבכות את מה שהיה, להוקיר תודה על השיעור שהוא הביא, ולשחרר אותו באהבה. השמש כבר עולה באופק שמאחורי שני המגדלים בקלף. המוות מפנה את הדרך לזריחה המרהיבה של קלף השמש הניבט בהמשך המסע שלך.`
+        content: `כשקלף המוות (Death) עולה בפריסת טארוט, רוב האנשים חווים רתיעה אינסטינקטיבית. השלד הניבט מהקלף, הצבעים הכהים והאסוציאציה למילה 'מוות' מייצרים מיד חרדה. \nאך האמת בעולם הטארוט הפוכה לחלוטין: קלף המוות הוא אחת הברכות המפוארות ביותר שיכולות להופיע בדרך שלך.\n\nבטארוט, המוות אינו פיזי – הוא סימבולי. הוא מייצג את החוק הקוסמי הגדול ביותר של הבריאה: אי אפשר לברוא משהו חדש בלי לפנות לו מקום. המוות הוא השלכת העלים היבשים בסתיו, הפירוק של הקיים כדי להפוך לדשן שממנו יצמח האביב הבא.\n\nאם את נאחזת בכוח במערכת יחסים שסחטה את נשמתך, בעבודה שכבר אינה מפרה אותך, או בדפוס מחשבה שמקטין אותך ונובע מחרדה – את חוסמת את הנסים שהיקום מנסה להביא לחייך. קלף המוות מגיע ואומר לך בעדינות אך בנחישות: די. הגיע הזמן לשחרר.\n\nאיך לעבוד עם האנרגיה הזו השבוע?\n1. כתיבה ביומן: שאלי את עצמך – מה הדבר שאני נאחזת בו רק מתוך פחד משינוי, למרות שאני יודעת שהאנרגיה שלו כבר גוועה?\n2. טקסיות של שחרור: תני לעצמך רשות לבכות את מה שהיה, להוקיר תודה על השיעור שהוא הביא, ולשחרר אותו באהבה. השמש כבר עולה באופק שמאחורי שני המגדלים בקלף. המוות מפנה את הדרך לזריחה המרהיבה של קלף השמש הניבט בהמשך המסע שלך.`
       },
       mirror: {
         category: "רוחניות מודרנית",
         date: "14 במאי 2026",
         title: "הטארוט כראי פסיכולוגי: המעבר מחיזוי פסיבי לבוראות פעילה",
-        content: `במשך מאות שנים נתפסו קלפי הטארוט ככלי מיסטי שנועד לנבא עתידות באופן פסיבי: 'האם הוא יחזור אלי?', 'מתי אקבל כסף?', 'האם אצליח במבחן?'. 
-הבעיה בגישה הזו היא שהיא לוקחת ממך את הכוח הכי גדול שלך – את הבחירה החופשית (Free Will) ואת היותך בוראת המציאות של חייך.
-
-בגישה המודרנית והטיפולית שאני מובילה, אנו מתייחסים לטארוט כאל ראי פסיכולוגי ארכיטיפי. הקלפים אינם קובעים את העתיד שלך באופן שרירותי, אלא מציגים תמונה מדוייקת של התת-מודע שלך, של הפחדים, השאיפות והאנרגיות שפעילות אצלך ברגע זה ממש.
-
-כשאת פותחת קלף, הדימויים הויזואליים העשירים שלו עוקפים את מנגנוני ההגנה הרציונליים של המוח ומחברים אותך ישר לרגש ולאמת הפנימית שלך. קלף לא אומר לך 'זה מה שיקרה', אלא 'זו הדינמיקה שאת מייצרת כרגע – אם תמשיכי לפעול מתוך הפחד הזה, זה הנתיב שיווצר. אם תבחרי לשנות את התודעה שלך, העתיד ישתנה בהתאם'.
-
-זהו מעבר דרמטי מתפיסה של קורבן של הגורל – לתפיסה של יוצרת פעילה שאוחזת בהגה של חייה.`
+        content: `במשך מאות שנים נתפסו קלפי הטארוט ככלי מיסטי שנועד לנבא עתידות באופן פסיבי: 'האם הוא יחזור אלי?', 'מתי אקבל כסף?', 'האם אצליח במבחן?'. \nהבעיה בגישה הזו היא שהיא לוקחת ממך את הכוח הכי גדול שלך – את הבחירה החופשית (Free Will) ואת היותך בוראת המציאות של חייך.\n\nבגישה המודרנית והטיפולית שאני מובילה, אנו מתייחסים לטארוט כאל ראי פסיכולוגי ארכיטיפי. הקלפים אינם קובעים את העתיד שלך באופן שרירותי, אלא מציגים תמונה מדוייקת של התת-מודע שלך, של הפחדים, השאיפות והאנרגיות שפעילות אצלך ברגע זה ממש.\n\nכשאת פותחת קלף, הדימויים הויזואליים העשירים שלו עוקפים את מנגנוני ההגנה הרציונליים של המוח ומחברים אותך ישר לרגש ולאמת הפנימית שלך. קלף לא אומר לך 'זה מה שיקרה', אלא 'זו הדינמיקה שאת מייצרת כרגע – אם תמשיכי לפעול מתוך הפחד הזה, זה הנתיב שיווצר. אם תבחרי לשנות את התודעה שלך, העתיד ישתנה בהתאם'.\n\nזהו מעבר דרמטי מתפיסה של קורבן של הגורל – לתפיסה של יוצרת פעילה שאוחזת בהגה של חייה.`
       },
       "magician-art": {
         category: "כלים מעשיים",
         date: "05 במאי 2026",
         title: "3 שאלות התבוננות בהשראת אנרגיית הקוסם (The Magician)",
-        content: `אנרגיית הקוסם (The Magician) היא האנרגיה הממוקדת ביותר של המניפסטציה והעשייה האקטיבית. הקוסם אינו ממתין שדברים יקרו לו – הוא מרכז את כוח הרצון, רותם את הכלים שברשותו ומייצר מציאות.
+        content: `אנרגיית הקוסם (The Magician) היא האנרגיה הממוקדת ביותר של המניפסטציה והעשייה האקטיבית. הקוסם אינו ממתין שדברים יקרו לו – הוא מרכז את כוח הרצון, רותם את הכלים שברשותו ומייצר מציאות.\n\nהקוסם מזכיר לנו שלפעמים אנו נכנסים למעגלים אינסופיים של תכנון, קריאת עוד ספר, עשיית עוד קורס והמתנה לתחושת 'מוכנות' דמיונית. אך האמת היא שהמוכנות נוצרת רק תוך כדי תנועה ועשייה.\n\nכדי להתחבר לאנרגיה הזו השבוע, קחי מחברת, הדליקי נר, וכתבי תשובות כנות ל-3 השאלות הבאות:\n1. מיפוי יסודות: מהם 4 המשאבים או הכישרונות שיש לי כבר עכשיו (למשל: סבלנות, יכולת הקשבה, חוש עיצובי, קשרים חברתיים)? כיצד אוכל להשתמש בהם יחד השבוע?\n2. חסימת הדליפות: איזה פחד מונע ממני לפעול כרגע, ואיך אוכל להפוך את הפחד הזה לתוכנית פעולה קטנה וממוקדת?\n3. הצעד של הקוסם: מהו הצעד הפרקטי הקטן ביותר (צעד של 10 דקות) שאני יכולה לעשות כבר היום כדי להניע את הפרויקט או השאיפה שלי קדימה?`
+      }
+    };
 
-הקוסם מזכיר לנו שלפעמים אנו נכנסים למעגלים אינסופיים של תכנון, קריאת עוד ספר, עשיית עוד קורס והמתנה לתחושת 'מוכנות' דמיונית. אך האמת היא שהמוכנות נוצרת רק תוך כדי תנועה ועשייה.
-
-כדי להתחבר לאנרגיה הזו השבוע, קחי מחברת, הדליקי נר, וכתבי תשובות כנות ל-3 השאלות הבאות:
-1. מיפוי יסודות: מהם 4 המשאבים או הכישרונות שיש לי כבר עכשיו (למשל: סבלנות, יכולת הקשבה, חוש עיצובי, קשרים חברתיים)? כיצד אוכל להשתמש בהם יחד השבוע?
-2. חסימת הדליפות: איזה פחד מונע ממני לפעול כרגע, ואיך אוכל להפוך את הפחד הזה לתוכנית פעולה קטנה וממוקדת?
-3. הצעד של הקוסם: מהו הצעד הפרקטי הקטן ביותר (צעד של 10 דקות) שאני יכולה לעשות כבר היום כדי להניע את הפרויקט או השאיפה שלי קדימה?`
+    // Immersive Zodiac Horoscope Database
+    const horoscopeDatabase = {
+      aries: {
+        titleHe: "הורוסקופ יומי: טלה",
+        titleEn: "Daily Forecast // Aries",
+        icon: "♈",
+        general: "היום האש הפנימית שלך קורנת בעוצמה גבוהה במיוחד. תנודות פלנטריות מעניקות לך אומץ ליזום מהלך שחששת ממנו לאחרונה. אנרגיית המניפסטציה שלך בשיאה – הגדירי כיוון מדויק ופעלי.",
+        advice: "המנעי מאימפולסיביות בשיחות אישיות, ותעלי את פרץ האנרגיה לפרויקטים יצירתיים הממתינים לך.",
+        tarot: "הקוסם (The Magician) – כל המשאבים והכלים כבר בידיים שלך."
+      },
+      taurus: {
+        titleHe: "הורוסקופ יומי: שור",
+        titleEn: "Daily Forecast // Taurus",
+        icon: "♉",
+        general: "היום מזמין אותך להאט ולהתחבר ליציבות הפנימית שלך. שפע ארצי מנסה להיכנס לחייך דרך שינוי תודעתי קטן. זהו יום מצוין לבסס עוגנים חדשים ולהעניק הזנה אורגנית לנפש ולגוף.",
+        advice: "קבלי החלטות פיננסיות או אישיות מתוך מקום של שקט, ואל תתני ללחצים חיצוניים להוציא אותך מאיזון.",
+        tarot: "הקיסרית (The Empress) – התחברי לשפע, לצמיחה האורגנית ולאמא אדמה."
+      },
+      gemini: {
+        titleHe: "הורוסקופ יומי: תאומים",
+        titleEn: "Daily Forecast // Gemini",
+        icon: "♊",
+        general: "המוח שלך שופע רעיונות מבריקים והתחברויות קוסמיות מעניינות. משהו שאת שומעת או קוראת היום עשוי לשנות את נקודת המבט שלך על דילמה ממושכת. התקשורת שלך מהפנטת ומדוייקת.",
+        advice: "רכזי את האנרגיות המפוזרות שלך לנושא אחד משמעותי במקום לפעול בבת אחת בחמש חזיתות.",
+        tarot: "האוהבים (The Lovers) – הגיע הזמן לקבל החלטה משמעותית מתוך הלב והאמת הפנימית."
+      },
+      cancer: {
+        titleHe: "הורוסקופ יומי: סרטן",
+        titleEn: "Daily Forecast // Cancer",
+        icon: "♋",
+        general: "הירח מעצים את החיבור שלך לאינטואיציה ולמים העמוקים של הרגש. הדרכה פנימית ברורה מגיעה אלייך ברגעי השקט – אל תתעלמי מתחושות הבטן שלך היום. קשרים משפחתיים או אישיים עוברים ריפוי.",
+        advice: "העניקי לעצמך מרחב מוגן ובטוח, וסנני רעשים ולחצים חיצוניים שאינם שייכים לך.",
+        tarot: "הכוהנת הגדולה (The High Priestess) – התשובות ממתינות לך בתוך התת-מודע והאינטואיציה."
+      },
+      leo: {
+        titleHe: "הורוסקופ יומי: אריה",
+        titleEn: "Daily Forecast // Leo",
+        icon: "♌",
+        general: "זה הזמן שלך לזרוח ולתפוס את קדמת הבמה. הכוכבים ממיסים חסימות ישנות ומאפשרים לך לבטא את האמת היצירתית שלך בביטחון מוחלט. הנוכחות המגנטית שלך מעוררת השראה בסובבים אותך.",
+        advice: "השתמשי בכוח ההשפעה שלך כדי להרים ולחזק אחרים, ושתפי את האור שלך באהבה וללא פילטרים.",
+        tarot: "השמש (The Sun) – הצלחה, חיוניות ובהירות מוחלטת מאירות את דרכך ברגע זה."
+      },
+      virgo: {
+        titleHe: "הורוסקופ יומי: בתולה",
+        titleEn: "Daily Forecast // Virgo",
+        icon: "♍",
+        general: "היום מאפשר לך לעשות סדר עמוק במחשבות ובתוכניות העתידיות שלך. הבנה פסיכולוגית מדוייקת של תהליך שעברת לאחרונה מעניקה לך הקלה עצומה. הפרטים הקטנים מתחברים כעת לתמונה הגדולה.",
+        advice: "הפסיקי לבקר את עצמך על חוסר שלמות, והעריכי את הדרך המשמעותית והאמיצה שעשית.",
+        tarot: "גלגל המזל (The Wheel of Fortune) – הכל זז במחזוריות מושלמת, מצאי את המרכז השקט שלך."
+      },
+      libra: {
+        titleHe: "הורוסקופ יומי: מאזניים",
+        titleEn: "Daily Forecast // Libra",
+        icon: "♎",
+        general: "הכוכבים מייצרים הרמוניה ואיזון במערכות היחסים שלך היום. תחושה של צדק קוסמי וסדר פנימי מחליפה את הלבטים של השבוע האחרון. בחירות שנעשות היום יובילו לתוצאות יציבות ומפרות.",
+        advice: "שתפי את האמת שלך ביושר וברוך, ומצאי את דרך המלך המאזנת בין הרצון שלך לצרכי הסביבה.",
+        tarot: "האוהבים (The Lovers) – הרמוניה פנימית ושלמות הלב הן המפתח לכל החלטה היום."
+      },
+      scorpio: {
+        titleHe: "הורוסקופ יומי: עקרב",
+        titleEn: "Daily Forecast // Scorpio",
+        icon: "♏",
+        general: "האנרגיה המסתורית והעוצמתית שלך מתחברת היום לתהליכי שינוי עמוקים. דפוס קארמי ישן או חסימה רגשית גוועים סוף סוף ומאפשרים לך להיוולד מחדש מתוך האפר. אל תחששי מהפירוק הזמני.",
+        advice: "שחררי באהבה את מה שכבר מת בחייך, ותני לחדש והמדוייק ביותר להיכנס ללא התנגדות.",
+        tarot: "המוות (The Death) – סיום מבורך של שלב המפנה מקום לפריחה קוסמית יוצאת דופן."
+      },
+      sagittarius: {
+        titleHe: "הורוסקופ יומי: קשת",
+        titleEn: "Daily Forecast // Sagittarius",
+        icon: "♐",
+        general: "האופטימיות הטבעית ורוח ההרפתקנות שלך חוזרות לקדמת הבמה. היקום שולח לך סימנים מעודדים לגבי דרך חדשה ושאיפות קרובות. המזל מאיר פנים למי שמוכן לקחת סיכון מחושב מתוך אמונה.",
+        advice: "הרחיבי את האופקים שלך, תלמדי משהו חדש והעניקי השראה לסובבים אותך בראייה החיובית שלך.",
+        tarot: "השוטה (The Fool) – צעדי באומץ אל הלא נודע מתוך אמון מלא שהיקום יפרוס לך רשת ביטחון."
+      },
+      capricorn: {
+        titleHe: "הורוסקופ יומי: גדי",
+        titleEn: "Daily Forecast // Capricorn",
+        icon: "♑",
+        general: "היום מעניק לך נחישות ומיקוד יוצאי דופן להשלמת משימות מורכבות. המאמצים שלך נושאים פרי והיכולת הארגונית שלך מוערכת מאוד. מפת הדרכים האישית שלך הולכת ומתבהרת.",
+        advice: "הרשי לעצמך ליהנות מהישגייך ושלבי רגעי מנוחה והודיה בתוך המירוץ אחר המטרות הגדולות.",
+        tarot: "הקוסם (The Magician) – רתמי את כל המשאבים הידע והקשרים כדי לברוא את ההצלחה שלך."
+      },
+      aquarius: {
+        titleHe: "הורוסקופ יומי: דלי",
+        titleEn: "Daily Forecast // Aquarius",
+        icon: "♒",
+        general: "החשיבה המקורית והחזון החדשני שלך מובילים אותך לפריצת דרך רעיונית משמעותית. זהו יום מצוין להשתחרר מדפוסים קבועים ולהציע פתרונות לא שגרתיים. החיבור שלך לתודעה הקולקטיבית מדוייק.",
+        advice: "אל תתני לפחד מהערכת הסביבה לעכב אותך – לכי עם האמת הייחודית והאינדיבידואלית שלך.",
+        tarot: "השמש (The Sun) – הבהירות והאור של הרעיונות שלך יסחפו אחריהם הצלחה רבה."
+      },
+      pisces: {
+        titleHe: "הורוסקופ יומי: דגים",
+        titleEn: "Daily Forecast // Pisces",
+        icon: "♓",
+        general: "היום החיבור הרוחני והמיסטי שלך ליקום מעמיק בצורה מרגשת. חלומות או סימנים קוסמיים נושאים עבורך מסרים ברורים מהתת-מודע. המים הרגשיים שלך רגועים ומאפשרים שיקוף אמת צרופה.",
+        advice: "העניקי לעצמך מרחב להתבוננות רוחנית, התחברי לאמנות, מוזיקה או כתיבה אינטואיטיבית.",
+        tarot: "הכוהנת הגדולה (The High Priestess) – הקשיבי לקול הפנימי השקט והאינטואיטיבי שלך."
       }
     };
 
     let activeCard = null;
     let isShuffling = false;
 
+    // --- GENERATE FLOATING STARS FOR HIGH-END CINEMATIC ATMOSPHERE ---
+    function generateStars() {
+      const starfield = document.getElementById("starfield");
+      const count = window.innerWidth < 768 ? 40 : 100;
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement("div");
+        star.className = "absolute bg-white rounded-full pointer-events-none";
+        
+        // Random dimensions and properties for depth
+        const size = Math.random() * 1.5 + 0.5;
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        
+        // Soft glowing amber tinted stars
+        if (Math.random() > 0.7) {
+          star.classList.add("bg-[#E3BA71]/60");
+        } else {
+          star.classList.add("bg-white/40");
+        }
+        
+        starfield.appendChild(star);
+        
+        // Subtle organic shimmering animation using GSAP
+        gsap.to(star, {
+          opacity: Math.random() * 0.8 + 0.2,
+          duration: Math.random() * 3 + 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
+    }
+
     // --- GSAP PAGE INTRO STAGGERED ENTRANCE ---
     window.addEventListener("DOMContentLoaded", () => {
+      generateStars();
+      
       const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.2 } });
       
       tl.to("#navbar", { opacity: 1, y: 0, startAt: { y: -20 } })
@@ -656,15 +920,55 @@
       gsap.to("#rotating-compass", { rotate: -360, duration: 80, repeat: -1, ease: "none" });
       gsap.to("#orbit-dashed", { rotate: 360, duration: 25, repeat: -1, ease: "none" });
 
-      // Gentle floating loops for runes
-      gsap.to("#rune-pisces", { opacity: 1, y: -8, rotate: 3, duration: 6, repeat: -1, yoyo: true, ease: "sine.inOut" });
-      gsap.to("#rune-scorpio", { opacity: 1, y: 8, rotate: -3, duration: 5.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
-      gsap.to("#rune-sagit", { opacity: 1, y: -7, rotate: 2, duration: 7, repeat: -1, yoyo: true, ease: "sine.inOut" });
-      gsap.to("#rune-libra", { opacity: 1, y: 9, rotate: -2, duration: 6.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
-      gsap.to("#rune-gemini", { opacity: 1, y: -8, rotate: 3, duration: 5.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      // Gentle floating loops for runes (Now fully hooked into background elements!)
+      gsap.to("#rune-pisces", { opacity: 0.6, y: -12, rotate: 6, duration: 6, repeat: -1, yoyo: true, ease: "sine.inOut", startAt: { opacity: 0 } });
+      gsap.to("#rune-scorpio", { opacity: 0.6, y: 12, rotate: -6, duration: 5.5, repeat: -1, yoyo: true, ease: "sine.inOut", startAt: { opacity: 0 } });
+      gsap.to("#rune-sagit", { opacity: 0.6, y: -10, rotate: 4, duration: 7, repeat: -1, yoyo: true, ease: "sine.inOut", startAt: { opacity: 0 } });
+      gsap.to("#rune-libra", { opacity: 0.6, y: 14, rotate: -4, duration: 6.5, repeat: -1, yoyo: true, ease: "sine.inOut", startAt: { opacity: 0 } });
+      gsap.to("#rune-gemini", { opacity: 0.6, y: -12, rotate: 6, duration: 5.8, repeat: -1, yoyo: true, ease: "sine.inOut", startAt: { opacity: 0 } });
 
       initPlasmaCanvas();
     });
+
+    // --- INTERACTIVE HOROSCOPE SELECTOR LOGIC ---
+    function fetchHoroscope(signKey) {
+      const data = horoscopeDatabase[signKey];
+      if (!data) return;
+
+      const card = document.getElementById("horoscope-reveal");
+      
+      // Update data
+      document.getElementById("reveal-icon").innerText = data.icon;
+      document.getElementById("reveal-title-he").innerText = data.titleHe;
+      document.getElementById("reveal-title-en").innerText = data.titleEn;
+      document.getElementById("reveal-general").innerText = data.general;
+      document.getElementById("reveal-advice").innerText = data.advice;
+      document.getElementById("reveal-tarot-guide").innerText = data.tarot;
+
+      // Animate selection grids for tactile feedback
+      const gridItems = document.querySelectorAll("#zodiac-grid > div");
+      gridItems.forEach(item => {
+        item.classList.remove("border-[#E3BA71]/80", "bg-[#121021]/80");
+        item.classList.add("border-white/5", "bg-[#121021]/40");
+      });
+      
+      // Highlight selected sign
+      event.currentTarget.classList.add("border-[#E3BA71]/80", "bg-[#121021]/80");
+      event.currentTarget.classList.remove("border-white/5", "bg-[#121021]/40");
+
+      // Animate card reveal using custom spring curves
+      card.classList.remove("hidden");
+      gsap.killTweensOf(card);
+      gsap.fromTo(card, 
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power4.out" }
+      );
+      
+      // Scroll smoothly to reveal card if needed
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
+    }
 
     // --- CANVAS PLASMA FLAME ENGINE (Interactive purple plasma sparkles over static crystal ball) ---
     let canvas, ctx, particles = [];
@@ -690,7 +994,7 @@
         this.x = canvas.width / 2;
         this.y = canvas.height / 2;
         this.radius = Math.random() * 2 + 1;
-        this.color = Math.random() > 0.4 ? "rgba(123, 44, 191, " + (Math.random() * 0.4 + 0.2) + ")" : "rgba(212, 175, 55, " + (Math.random() * 0.3 + 0.1) + ")";
+        this.color = Math.random() > 0.4 ? "rgba(123, 44, 191, " + (Math.random() * 0.4 + 0.2) + ")" : "rgba(227, 186, 113, " + (Math.random() * 0.3 + 0.1) + ")";
         
         if (isBurst) {
           const angle = Math.random() * Math.PI * 2;
@@ -774,7 +1078,7 @@
           // Load random card data
           activeCard = tarotDatabase[Math.floor(Math.random() * tarotDatabase.length)];
           document.getElementById("tarot-front-img").src = activeCard.image;
-          document.getElementById("tarot-card-front").style.borderColor = activeCard.accent || "#D4AF37";
+          document.getElementById("tarot-card-front").style.borderColor = activeCard.accent || "#E3BA71";
 
           // Step 2: Smooth 3D Flip using elastic spring
           gsap.to(inner, {
@@ -815,6 +1119,21 @@
       modal.style.pointerEvents = "auto";
       gsap.to(modal, { opacity: 1, duration: 0.5, ease: "power3.out" });
     }
+
+    // --- Form validation and interactive submit feedback ---
+    document.getElementById("booking-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector("button[type='submit']");
+      submitBtn.disabled = true;
+      submitBtn.innerText = "שולח בקשה קוסמית... ✨";
+      
+      setTimeout(() => {
+        submitBtn.innerText = "הבקשה התקבלה בהצלחה! 🕊️";
+        submitBtn.classList.remove("from-[#E3BA71]", "to-[#C19F5C]");
+        submitBtn.classList.add("from-green-600", "to-emerald-700", "text-white");
+        e.target.reset();
+      }, 1500);
+    });
 
     function closeModal() {
       const modal = document.getElementById("reading-modal");
